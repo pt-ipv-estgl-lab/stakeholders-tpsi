@@ -1,0 +1,70 @@
+{% include 'stakeholders/signup.html' %}
+<div
+  class="modal fade"
+  id="ModalFormLogin"
+  tabindex="-1"
+  aria-labelledby="ModalFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Login</h1>
+          {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+        <script>
+            $(document).ready(function() {
+                $('#ModalFormLogin').modal('show');
+            });
+        </script>
+    {% endif %}
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"
+                ><i class="fa-solid fa-user"></i> Username</label
+              >
+              <input type="text" class="form-control" id="id_username"
+              autocomplete="new-username" required="required" name="username"
+              aria-describedby="usernameHelp" {% if request.method == 'POST' %}
+              value="{{ request.POST.username }}" {% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_password" class="form-label"
+                ><i class="fa-solid fa-key"></i> Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                required="required"
+                id="id_password"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+            <p>
+              Ainda não tem conta?
+              <button
+                type="button"
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#ModalFormRegister"
+              >
+                Registe-se
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
