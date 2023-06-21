@@ -54,7 +54,7 @@
   <div class="collapse navbar-collapse first" id="expand">
     <form id="searchbox" class="search-form ml-auto" role="search">
       <div class="input-group">
-        <input id="search-input" class="form-control text-center" type="text" placeholder="Pesquisar/Search &#128270;" aria-label="Search" aria-describedby="search-icon">
+        <input id="search-input" class="form-control text-center" type="text" placeholder="Pesquisar/Search" aria-label="Search" aria-describedby="search-icon">
         <button class="btn btn-light" type="button" id="search-icon">&#128269;</button>
       </div>
     </form>
@@ -101,26 +101,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" href="/" id="homebutton" role="button"  aria-expanded="false">Página Inicial</a>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="cursosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cursos</a>
-            <ul class="dropdown-menu" aria-labelledby="cursosDropdown">
-            </ul>
-          </div>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="formacoesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Formações</a>
-            <ul class="dropdown-menu" aria-labelledby="formacoesDropdown">
-            </ul>
-          </div>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="servicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
-            <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
-            </ul>
-          </div>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="atividadesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Atividades</a>
-            <ul class="dropdown-menu" aria-labelledby="atividadesDropdown">
-            </ul>
-          </div>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="/profile" id="profilebutton" role="button" aria-expanded="false">Perfil</a>
+          {%endif%}
         </div>
       </div>
     </div>
@@ -134,7 +117,7 @@
 
   </body>
 
-  <footer class="bg-dark text-center text-white">
+  <footer class="bg-dark text-center text-white fixed-bottom">
   <!-- Grid container -->
   <div class="container p-4 pb-0">
     <!-- Section: Social media -->

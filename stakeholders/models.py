@@ -79,11 +79,11 @@ class EventoCientifico(Atividade):
     local_alojamento = models.TextField(blank=True)
     orador = models.TextField(blank=True)
     moderador = models.TextField(blank=True)
-    data_submissao_resumos = models.DateField(blank=True)
-    data_notificacao_resumos = models.DateField(blank=True)
+    data_submissao_resumos = models.TextField(blank=True)
+    data_notificacao_resumos = models.TextField(blank=True)
     link = models.TextField(blank=True)
     parcerias = models.TextField(blank=True)
-    numero_elementos_equipa = models.IntegerField(blank=True)
+    numero_elementos_equipa = models.TextField(blank=True)
 
     def __str__(self):
         return self.nome
@@ -104,7 +104,7 @@ class Profile(models.Model):
     atividades = models.ManyToManyField(Atividade, through='Inscricao')
 
     def __str__(self):
-        return self.nome_completo
+        return self.user.username
 
 
 class Participante(Profile):
