@@ -1,0 +1,330 @@
+/* NAVBAR CSS */
+
+@media (max-width: 991.98px) {
+  .navbar.navbar-expand-lg.navbar-dark.bg-dark .container-nav .collapse.navbar-collapse.first .Username-btn {
+    margin-top: 10px;
+  }
+
+  .collapse.navbar-collapse.first {
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
+
+
+.container-nav {
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 2%;
+}
+
+.collapse.navbar-collapse.first {
+  justify-content: space-between;
+
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-ipv {
+  margin-left: 20px;
+  max-width: 120px;
+  height: auto;
+}
+
+.logo-eunice {
+  max-width: 75px;
+  height: auto;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 50%;
+}
+
+.search-form .input-group {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.search-form .input-group-prepend,
+.search-form .input-group-text {
+  border: none;
+  background-color: white;
+}
+
+.search-form #search-input {
+  border: none;
+  background-color: white;
+  box-shadow: none;
+}
+
+.navbar.navbar-dark.bg-dark .direita {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 60%;
+}
+
+.navbar.navbar-dark.bg-dark .navbar-brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  width: 30%;
+}
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark .container-nav .collapse.navbar-collapse.first .Username-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+}
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark .container-nav .collapse.navbar-collapse.first .Username-btn .navbar-text {
+  margin-right: 30px;
+  flex-direction: row;
+  display: flex;
+}
+
+.btn-entrar {
+  width: 100px;
+  height: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  background-color: inherit;
+  border-color: #fff;
+  border-radius: 5px;
+  /* Adjust the value to make the edges more or less rounded */
+  padding: 0.5em 0;
+  color: #fff;
+  /* Set the text color to white */
+  line-height: 0;
+  /* Adjust the line height to control vertical alignment */
+}
+
+.btn-entrar:hover {
+  background-color: #fff;
+  color: inherit;
+  border-color: #fff;
+}
+
+
+/* CAROUSEL CSS */
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item img {
+  padding-top: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-indicators {
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+
+/* OUTRAS IMAGENS CSS */
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-overlay:hover img {
+  transform: scale(1.02);
+}
+
+/* CSS CARTAS CURSOS */
+.container-cards {
+  background-color: #f2f2f2;
+  width: 100%;
+  padding: 30px;
+}
+
+.card {
+  transition: transform 0.2s;
+}
+
+.card-body {
+  display: flex;
+  max-height: 200px;
+  min-height: 200px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  font-weight: bold;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-link {
+  text-decoration: none;
+}
+
+/* BARRA SEPARAÇÂO CSS */
+.text-overlay-cursos .nome-escolas {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.black-bar {
+  padding-bottom: 10px;
+  background-color: white;
+  width: 100%;
+}
+
+#cursos {
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* MODAL CSS */
+.modal-content {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.btn-close {
+  position: absolute;
+  right: 0;
+  padding: 1em;
+}
+
+h1 {
+  font-size: 2.3em;
+  font-weight: bold;
+}
+
+.myform {
+  padding: 2em;
+  max-width: 100%;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+}
+
+@media (max-width: 576px) {
+  .myform {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.form-control:focus {
+  background-color: #fff;
+  color: black;
+  box-shadow: inset 0 -1px 0 #7e7e7e;
+}
+
+.form-control {
+  background-color: #fff;
+  color: black;
+  padding-left: 10px;
+  border: 0;
+  border-radius: 10px;
+}
+
+.myform .btn {
+  width: 100%;
+  font-weight: 800;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0.5em 0;
+}
+
+.myform .btn:hover {
+  background-color: inherit;
+  color: #fff;
+  border-color: #fff;
+}
+
+p {
+  text-align: center;
+  padding-top: 5px;
+  color: inherit;
+}
+
+p a {
+  color: #e1e1e1;
+  text-decoration: none;
+}
+
+p a:hover {
+  color: inherit;
+}
+
+.container-message {
+  z-index: 9999;
+  position: fixed;
+  top: 70px;
+  /* Adjust the top position as needed */
+  right: 0;
+  max-width: 50%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; /* Adjust the z-index value to make sure it appears above other content */
+}
+
+body{
+  padding-bottom: 100px;
+}

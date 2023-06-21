@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/97eb94635c.js" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'stakeholders/css/style.css' %}">
+
+    <title>Página Inicial</title>
+  </head>
+  <body>
+        
+    {% include 'stakeholders/login.html' %}
+  <!-- NAVBAR1 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navbar1">
+    <div class="container-nav">
+      <a class="navbar-brand" href="#">
+    <div class="logo-container">
+      <img src="{% static 'stakeholders/img/logoIPV.png' %}" class="img-fluid logo-ipv" alt="">
+      <img src="{% static 'stakeholders/img/logo-eunice.png' %}" class="img-fluid logo-eunice" alt="">
+    </div>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#expand" aria-controls="expand" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse first" id="expand">
+    <form id="searchbox" class="search-form ml-auto" role="search">
+      <div class="input-group">
+        <input id="search-input" class="form-control text-center" type="text" placeholder="Pesquisar/Search" aria-label="Search" aria-describedby="search-icon">
+        <button class="btn btn-light" type="button" id="search-icon">&#128269;</button>
+      </div>
+    </form>
+    <div class="Username-btn">
+      {% if user.is_authenticated %}
+      <div class="navbar-text">Bem-Vindo! {{ user.username }}</div>
+      <form id="logout-form" action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-entrar">Logout</button>
+      </form>
+      {% else %}
+      <button type="button" class="btn-entrar" data-bs-toggle="modal" data-bs-target="#ModalFormLogin">Login</button>
+      {% endif %}
+    </div>
+  </div>
+  </div>
+  </nav>
+    
+    {% if login_failed %}
+    <div class="container-message">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Username ou Password Incorretos! Por Favor tente de novo.</strong>
+      </div>
+    </div>
+    {% endif %}
+    {% if register_failed %}
+      <div class="container-message">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Esse Utilizador já existe! Por Favor tente de novo.</strong>
+        </div>
+      </div>
+    {% endif %}
+
+
+  <!-- NAVBAR2 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" aria-label="Navbar2">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/" id="homebutton" role="button"  aria-expanded="false">Página Inicial</a>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="/profile" id="profilebutton" role="button" aria-expanded="false">Perfil</a>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-content">
+    {% block content %} 
+    
+    {% endblock %}
+  </div>
+
+  </body>
+
+  <footer class="bg-dark text-center text-white fixed-bottom">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+     
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <a class="text-white" href="https://mdbootstrap.com/"></a>
+  </div>
+  <!-- Copyright -->
+</footer>
+  
+</div>
+</html>

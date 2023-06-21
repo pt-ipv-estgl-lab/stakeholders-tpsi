@@ -1,0 +1,82 @@
+<div
+  class="modal fade"
+  id="ModalFormRegister"
+  tabindex="-1"
+  aria-labelledby="ModalFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Registo</h1>
+          <form method="post" action="{% url 'sign_up' %}">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"
+                ><i class="fa-solid fa-user"></i> Username</label
+              >
+              <input type="text" class="form-control" id="id_username"
+              autocomplete="new-username" required="required" name="username"
+              aria-describedby="usernameHelp" {% if request.method == 'POST'%}
+              value="{{ request.POST.username }}"{% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_email" class="form-label"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input type="email" class="form-control" autocomplete="new-email"
+              id="id_email" name="email" required="required" {% if
+              request.method == 'POST' %} value="{{ request.POST.email }}" {%
+              endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_password1" class="form-label"
+                ><i class="fa-solid fa-key"></i> Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                id="id_password1"
+                required="required"
+                name="password1"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="id_password2" class="form-label"
+                ><i class="fa-solid fa-key"></i> Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                id="id_password2"
+                required="required"
+                name="password2"
+              />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">Registar</button>
+            <p>
+              Already have an account?
+              <button
+                type="button"
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#ModalFormLogin"
+              >
+                Login
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
