@@ -74,7 +74,7 @@
   </div>
 </div>
 
-
+{% include 'stakeholders/inscricao.html' %}
 <!-- BARRA SEPARAÇÃO -->
 <div class="black-bar cursostitulo"></div>
 {% if cursos %}
@@ -195,14 +195,15 @@
             <textarea class="form-control" id="id_regime" name="regime" readonly>{{ curso.regime }}</textarea>
           
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ curso.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -210,6 +211,8 @@
   </div>
 </div>
 {% endfor %}
+
+
 
 
 
@@ -335,7 +338,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ formacao.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição
@@ -483,7 +486,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ concurso.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição
@@ -632,7 +635,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ palestra.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição
@@ -783,7 +786,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ congresso.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição
@@ -932,7 +935,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ seminario.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição
@@ -1031,7 +1034,7 @@
                 type="button"
                 class="btn btn-link"
                 data-bs-toggle="modal"
-                data-bs-target="#ModalFormRegister"
+                onclick="openModal({{ servico.id }})"
                 style="margin-top: 30px;"
               >
                 Pré-Inscrição

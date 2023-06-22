@@ -1,0 +1,256 @@
+<div
+  class="modal fade"
+  id="loginModal1"
+  tabindex="-1"
+  aria-labelledby="ModalFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Login</h1>
+          {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+        <script>
+            $(document).ready(function() {
+                $('#ModalFormLogin').modal('show');
+            });
+        </script>
+    {% endif %}
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"
+                ><i class="fa-solid fa-user"></i> Username</label
+              >
+              <input type="text" class="form-control" id="id_username"
+              autocomplete="new-username" required="required" name="username"
+              aria-describedby="usernameHelp" {% if request.method == 'POST' %}
+              value="{{ request.POST.username }}" {% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_password" class="form-label"
+                ><i class="fa-solid fa-key"></i> Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                required="required"
+                id="id_password"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+            <p>
+              Ainda não tem conta?
+              <button
+                type="button"
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#ModalRegister"
+              >
+                Registe-se
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="ModalRegister"
+  tabindex="-1"
+  aria-labelledby="ModalFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Registo</h1>
+          <form method="post" action="{% url 'sign_up' %}">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"
+                ><i class="fa-solid fa-user"></i> Username</label
+              >
+              <input type="text" class="form-control" id="id_username"
+              autocomplete="new-username" required="required" name="username"
+              aria-describedby="usernameHelp" {% if request.method == 'POST'%}
+              value="{{ request.POST.username }}"{% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_email" class="form-label"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input type="email" class="form-control" autocomplete="new-email"
+              id="id_email" name="email" required="required" {% if
+              request.method == 'POST' %} value="{{ request.POST.email }}" {%
+              endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_password1" class="form-label"
+                ><i class="fa-solid fa-key"></i> Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                id="id_password1"
+                required="required"
+                name="password1"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="id_password2" class="form-label"
+                ><i class="fa-solid fa-key"></i> Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                autocomplete="new-password"
+                id="id_password2"
+                required="required"
+                name="password2"
+              />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">Registar</button>
+            <p>
+              Already have an account?
+              <button
+                type="button"
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal1"
+              >
+                Login
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Original Modal for Activity Registration -->
+
+<div class="modal fade" id="myModal50" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="myform bg-dark">
+                    <h1 class="text-center">Registo</h1>
+                    <form method="POST" id="inscricaoform" action="{% url 'inscricao' %}">
+                        {% csrf_token %}
+                        <div class="mb-3 mt-4">
+                            <label class="form-label">Primeiro Nome *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome"
+                                name="first_name" required="required" value="{{ request.user.first_name }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Último Nome *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Último Nome"
+                                name="last_name" required="required" value="{{ request.user.last_name }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputEmail4" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="" name="email"
+                                required="required" value="{{ request.user.email }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nome Completo *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Nome Completo"
+                                name="nome_completo" required="required"
+                                value="{{ request.user.profile.nome_completo }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nif *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Nif" name="nif"
+                                required="required" value="{{ request.user.profile.nif }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Morada *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Morada" name="morada"
+                                required="required" value="{{ request.user.profile.morada }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contacto *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contacto"
+                                required="required" value="{{ request.user.profile.contacto }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Freguesia *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Freguesia"
+                                name="freguesia" required="required" value="{{ request.user.profile.freguesia }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Concelho *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Concelho" name="concelho"
+                                required="required" value="{{ request.user.profile.concelho }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Distrito *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="Distrito" name="distrito"
+                                required="required" value="{{ request.user.profile.distrito }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Código Postal *</label>
+                            <input type="text" class="form-control" placeholder="" aria-label="CodigoPostal"
+                                required="required" name="codigo_postal"
+                                value="{{ request.user.profile.codigo_postal }}">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" style="" placeholder="" aria-label="" id="idatividade" name="idatividade" value>
+                        </div>
+                        <button type="submit" class="btn btn-light mt-3">Registar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Include the JavaScript/jQuery code -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+
+
+function openModal(cursoID) {
+  var isLoggedIn = {{ request.user.is_authenticated|lower }};
+  // Example usage in JavaScript
+  if (isLoggedIn) {
+    // User is logged in
+    // Set the value of the input field
+    $('#idatividade').val(cursoID);
+    // Show the modal for registered users
+    $('#myModal50').modal('show');
+  } else {
+    // User is not logged in
+    // Show the modal for login or registration
+    $('#loginModal1').modal('show');
+  }
+}
+</script>
