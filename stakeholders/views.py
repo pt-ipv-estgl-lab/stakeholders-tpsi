@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import AtividadeFormativa, EventoCientifico, Servico, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from django.contrib.auth import update_session_auth_hash
+
 
 def index(request):
     return render(request, 'stakeholders/index.html', {})
@@ -101,16 +102,87 @@ def sign_up(request):
 @login_required
 def profile_view(request):
     if request.method == 'POST':
-        # Process the form submission
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        # ... process other form fields
-
         # Update the user profile or perform other actions
+        user = request.user
+        # ... update other user fields
+        updated_fields = []
+
+        if user.first_name != request.POST.get('first_name'):
+            user.first_name = request.POST.get('first_name')
+            updated_fields.append('Primeiro Nome')
+
+        if user.last_name != request.POST.get('last_name'):
+            user.last_name = request.POST.get('last_name')
+            updated_fields.append('Último Nome')
+
+        if user.profile.nome_completo != request.POST.get('nome_completo'):
+            user.profile.nome_completo = request.POST.get('nome_completo')
+            updated_fields.append('Nome Completo')
+
+        if user.profile.nif != request.POST.get('nif'):
+            user.profile.nif = request.POST.get('nif')
+            updated_fields.append('Nif')
+
+        if user.profile.morada != request.POST.get('morada'):
+            user.profile.morada = request.POST.get('morada')
+            updated_fields.append('Morada')
+
+        if user.profile.codigo_postal != request.POST.get('codigo_postal'):
+            user.profile.codigo_postal = request.POST.get('codigo_postal')
+            updated_fields.append('Código Postal')
+
+        if user.profile.freguesia != request.POST.get('freguesia'):
+            user.profile.freguesia = request.POST.get('freguesia')
+            updated_fields.append('Freguesia')
+
+        if user.profile.concelho != request.POST.get('concelho'):
+            user.profile.concelho = request.POST.get('concelho')
+            updated_fields.append('Concelho')
+
+        if user.profile.distrito != request.POST.get('distrito'):
+            user.profile.distrito = request.POST.get('distrito')
+            updated_fields.append('Distrito')
+
+        if user.profile.contacto != request.POST.get('contacto'):
+            user.profile.contacto = request.POST.get('contacto')
+            updated_fields.append('Contacto')
+
+        # Change password
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if new_password or confirm_password:  # Check if any of the password fields are not empty
+            if new_password == confirm_password:
+                if user.check_password(old_password):
+                    user.set_password(new_password)
+                    updated_fields.append('Password')
+                    user.save()
+
+                    # Re-authenticate the user with the new password
+                    updated_user = authenticate(request, username=user.username, password=new_password)
+                    if updated_user is not None:
+                        login(request, updated_user)
+                    else:
+                        messages.error(request, 'Falha ao efetuar o login após a alteração da password.')
+                else:
+                    messages.error(request, 'A password antiga não corresponde.')
+            else:
+                messages.error(request, 'A nova password e a confirmação não correspondem.')
+
+        if updated_fields:
+            # Set a success message with the updated fields
+            success_message = f"Mudanças efetuadas nos campos: {', '.join(updated_fields)}"
+            messages.success(request, success_message)
+            
+        # Save the changes to the user and profile models
+        user.save()
+        user.profile.save()
 
         # Redirect to a different page after processing the form
         return redirect('profile')  # Assuming 'profile' is the name of the URL pattern for the profile view
-
+    
+    
     # Load the current logged-in user's information
     user = request.user
     username = user.username
@@ -119,7 +191,7 @@ def profile_view(request):
     email = user.email
 
     # Access the additional fields from the user profile model
-    profile = user.profile  # Assuming the user profile is related to the User model via a one-to-one field
+    profile = user.profile
 
     nome_completo = profile.nome_completo
     nif = profile.nif
@@ -147,18 +219,7 @@ def profile_view(request):
 
     return render(request, 'stakeholders/profile.html', context)
 
-@login_required
-def edit_profile(request):
-    profile = request.user.profile  # Assuming you have a OneToOne relationship between User and Profile
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile_view')  # Redirect to the profile view after successful submission
-    else:
-        form = ProfileForm(instance=profile)
-    
-    return render(request, 'stakeholders/profile.html', {'form': form})
+
 
 
 

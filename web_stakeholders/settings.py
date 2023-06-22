@@ -129,3 +129,6 @@ STATICFILESDIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
