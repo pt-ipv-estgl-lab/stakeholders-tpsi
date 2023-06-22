@@ -5,6 +5,8 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 
 <div class="container">
 <div class="row">
@@ -14,8 +16,28 @@
 				<h3>Perfil</h3>
 				<hr>
 			</div>
+      {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+
 			<!-- Form START -->
-			<form class="file-upload" method="POST">
+			<form class="file-upload" method="POST" id="profile-form">
         {% csrf_token %}
 				<div class="row mb-5 gx-5">
 					<!-- Contact detail -->
@@ -23,69 +45,70 @@
 						<div class="bg-secondary-soft px-4 py-5 rounded">
 							<div class="row g-3">
 								<h4 class="mb-4 mt-0">Detalhes de Contacto</h4>
-                <!-- Username -->
-                <div class="col-md-6">
-                  <label for="inputuser" class="form-label">Username *</label>
-                  <input type="text" class="form-control" placeholder="" id="username" value="{{ request.user.username }}" readonly>
-                </div>
-               <!-- Primeiro Nome -->
+                <!-- Primeiro Nome -->
                 <div class="col-md-6">
                   <label class="form-label">Primeiro Nome *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome" value="{{ request.user.first_name }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome" name="first_name" required="required" value="{{ request.user.first_name }}">
                 </div>
 
                 <!-- Último Nome -->
                 <div class="col-md-6">
-                  <label class="form-label">Último Nome *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Último Nome" value="{{ request.user.last_name }}">
+                    <label class="form-label">Último Nome *</label>
+                    <input type="text" class="form-control" placeholder="" aria-label="Último Nome" name="last_name" required="required" value="{{ request.user.last_name }}">
                 </div>
 
                 <!-- Email -->
                 <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email *</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="" value="{{ request.user.email }}">
+                    <label for="inputEmail4" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="" name="email" required="required" value="{{ request.user.email }}">
                 </div>
 
                 <!-- Nome Completo -->
                 <div class="col-md-6">
-                  <label class="form-label">Nome Completo *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Nome Completo" value="{{ request.user.profile.nome_completo }}">
+                    <label class="form-label">Nome Completo *</label>
+                    <input type="text" class="form-control" placeholder="" aria-label="Nome Completo" name="nome_completo" required="required" value="{{ request.user.profile.nome_completo }}">
                 </div>
 
                 <!-- Nif -->
                 <div class="col-md-6">
-                  <label class="form-label">Nif *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Nif" value="{{ request.user.profile.nif }}">
+                    <label class="form-label">Nif *</label>
+                    <input type="text" class="form-control" placeholder="" aria-label="Nif" name="nif" required="required" value="{{ request.user.profile.nif }}">
                 </div>
 
                 <!-- Morada -->
                 <div class="col-md-6">
                   <label class="form-label">Morada *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Morada" value="{{ request.user.profile.morada }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Morada" name="morada" required="required" value="{{ request.user.profile.morada }}">
                 </div>
 
                 <!-- Contacto -->
                 <div class="col-md-6">
                   <label class="form-label">Contacto *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Contacto" value="{{ request.user.profile.contacto }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contacto" required="required" value="{{ request.user.profile.contacto }}">
                 </div>
 
                 <!-- Freguesia -->
                 <div class="col-md-6">
                   <label class="form-label">Freguesia *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Freguesia" value="{{ request.user.profile.freguesia }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Freguesia" name="freguesia" required="required" value="{{ request.user.profile.freguesia }}">
                 </div>
 
                 <!-- Concelho -->
                 <div class="col-md-6">
                   <label class="form-label">Concelho *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Concelho" value="{{ request.user.profile.concelho }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Concelho" name="concelho" required="required" value="{{ request.user.profile.concelho }}">
                 </div>
 
                 <!-- Distrito -->
                 <div class="col-md-6">
                   <label class="form-label">Distrito *</label>
-                  <input type="text" class="form-control" placeholder="" aria-label="Distrito" value="{{ request.user.profile.distrito }}">
+                  <input type="text" class="form-control" placeholder="" aria-label="Distrito" name="distrito" required="required" value="{{ request.user.profile.distrito }}">
+                </div>
+
+                <!-- Código Postal -->
+                <div class="col-md-6">
+                  <label class="form-label">Código Postal *</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="CodigoPostal" required="required" name="codigo_postal" value="{{ request.user.profile.codigo_postal }}">
                 </div>
 		
 							</div> <!-- Row END -->
@@ -94,32 +117,32 @@
 				</div> <!-- Row END -->
 
 					<!-- change password -->
-					<div class="col-xxl-6">
-						<div class="bg-secondary-soft px-4 py-5 rounded">
-							<div class="row g-3">
-								<h4 class="my-4">Mudar Password</h4>
-								<!-- Old password -->
-								<div class="col-md-6">
-									<label for="exampleInputPassword1" class="form-label">Password Antiga *</label>
-									<input type="password" class="form-control" id="exampleInputPassword1">
-								</div>
-								<!-- New password -->
-								<div class="col-md-6">
-									<label for="exampleInputPassword2" class="form-label">Nova password *</label>
-									<input type="password" class="form-control" id="exampleInputPassword2">
-								</div>
-								<!-- Confirm password -->
-								<div class="col-md-12">
-									<label for="exampleInputPassword3" class="form-label">Confirmar Password *</label>
-									<input type="password" class="form-control" id="exampleInputPassword3">
-								</div>
-							</div>
-						</div>
-					</div>
+          <div class="col-xxl-6">
+            <div class="bg-secondary-soft px-4 py-5 rounded">
+              <div class="row g-3">
+                <h4 class="my-4">Mudar Password</h4>
+                <!-- Old password -->
+                <div class="col-md-6">
+                    <label for="old_password" class="form-label">Password Antiga *</label>
+                    <input type="password" class="form-control" id="old_password" name="old_password">
+                </div>
+                <!-- New password -->
+                <div class="col-md-6">
+                    <label for="new_password" class="form-label">Nova password *</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password">
+                </div>
+                <!-- Confirm password -->
+                <div class="col-md-12">
+                    <label for="confirm_password" class="form-label">Confirmar Password *</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                </div>
+              </div>
+            </div>
+          </div>
 				</div> <!-- Row END -->
 				<!-- button -->
 				<div class="gap-3 d-md-flex justify-content-md-end text-center">
-					<button type="button" class="btn btn-primary btn-lg">Gravar Mudanças</button>
+					<button type="submit" class="btn btn-primary btn-lg" form="profile-form">Gravar Mudanças</button>
 				</div>
 			</form> <!-- Form END -->
 		</div>
