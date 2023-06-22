@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import AtividadeFormativa, EventoCientifico, Servico, Profile
+from .models import AtividadeFormativa, EventoCientifico, Servico, Profile, Atividade, Inscricao
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import update_session_auth_hash
 
 
 def index(request):
@@ -218,6 +218,39 @@ def profile_view(request):
     }
 
     return render(request, 'stakeholders/profile.html', context)
+
+
+@login_required
+def inscricao_view(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+
+        # Update the profile fields with the submitted form data
+        user.profile.nome_completo = request.POST.get('nome_completo')
+        user.profile.nif = request.POST.get('nif')
+        user.profile.morada = request.POST.get('morada')
+        user.profile.codigo_postal = request.POST.get('codigo_postal')
+        user.profile.freguesia = request.POST.get('freguesia')
+        user.profile.concelho = request.POST.get('concelho')
+        user.profile.distrito = request.POST.get('distrito')
+        user.profile.contacto = request.POST.get('contacto')
+
+        user.save()
+        user.profile.save()
+
+        # Check if the user is already registered for the activity
+        existing_inscricao = Inscricao.objects.filter(profile=user.profile, atividade_id=request.POST.get('idatividade')).first()
+        if existing_inscricao:
+            return redirect('home')  # Redirect to home or display an error message
+
+        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade'))
+
+        return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
+
+    return render(request, 'stakeholders/home.html')
 
 
 

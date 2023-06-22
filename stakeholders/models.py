@@ -150,4 +150,8 @@ class Inscricao(models.Model):
     atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Inscrição: {self.pk}"
+
+
 
