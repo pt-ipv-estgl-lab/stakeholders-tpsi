@@ -154,12 +154,12 @@
 
 <div class="modal fade" id="myModal50" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 600px;">
             <div class="modal-body">
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
                 <div class="myform bg-dark">
-                    <h1 class="text-center">Registo</h1>
+                    <h1 class="text-center">Inscrição</h1>
                     <form method="POST" id="inscricaoform" action="{% url 'inscricao' %}">
                         {% csrf_token %}
                         <div class="mb-3 mt-4">
@@ -219,10 +219,10 @@
                                 required="required" name="codigo_postal"
                                 value="{{ request.user.profile.codigo_postal }}">
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" style="" placeholder="" aria-label="" id="idatividade" name="idatividade" value>
+                        <div class="mb-3" visually-hidden>
+                            <input type="text" class="form-control" style="display:none;" placeholder="" aria-label="" id="idatividade" name="idatividade" value>
                         </div>
-                        <button type="submit" class="btn btn-light mt-3">Registar</button>
+                        <button type="submit" class="btn btn-light mt-3">Pré-Inscrição</button>
                     </form>
                 </div>
             </div>
