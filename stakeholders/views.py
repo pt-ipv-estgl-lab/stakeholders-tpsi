@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -242,7 +242,7 @@ def inscricao_view(request):
         user.profile.save()
 
         # Check if the user is already registered for the activity
-        existing_inscricao = Inscricao.objects.filter(profile=user.profile, atividade_id=request.POST.get('idatividade')).first()
+        existing_inscricao = Inscricao.objects.filter(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
@@ -254,7 +254,72 @@ def inscricao_view(request):
 
     return render(request, 'stakeholders/home.html')
 
+def logininscricao_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Update the session to reflect the logged-in user
+            request.session.modified = True
+            # Return success response
+            return JsonResponse({'success': True})
+        else:
+            # Invalid login
+            return JsonResponse({'success': False})
+    
+    # Return error response for non-POST requests
+    return JsonResponse({'success': False, 'message': 'Invalid request method'})
 
+def inscricaoregisto_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        first = request.POST.get('first_name')
+        last = request.POST.get('last_name')
+
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return redirect(reverse('home') + '?register_failed=True')
+
+        # Check if a user with the same username or email already exists
+        if User.objects.filter(username__iexact=username).exists():
+            messages.error(request, 'Username already exists.')
+            return redirect(reverse('home') + '?register_failed=True')
+
+        if User.objects.filter(email__iexact=email).exists():
+            messages.error(request, 'Email already exists.')
+            return redirect(reverse('home') + '?register_failed=True')
+        
+
+        # Create the user
+        user = User.objects.create_user(username=username, email=email, password=password1, first_name=first, last_name=last)
+
+        # Create a profile for the user with all fields blank
+        profile = Profile.objects.create(user=user, nome_completo=request.POST.get('nome_completo'), nif=request.POST.get('nif'), morada=request.POST.get('morada'),
+                                         codigo_postal=request.POST.get('codigo_postal'), freguesia= request.POST.get('freguesia'), concelho=request.POST.get('concelho'),
+                                         distrito=request.POST.get('distrito'), contacto=request.POST.get('contacto'))
+
+        # Log in the user
+        login(request, user)
+        
+        existing_inscricao = Inscricao.objects.filter(profile_id=profile.id, atividade_id=request.POST.get('idatividade')).first()
+        if existing_inscricao:
+            messages.error(request, 'Já está inscrito nesta atividade.')
+            return redirect('home')  # Redirect to home or display an error message
+
+        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade'))
+        messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
+
+        # Registration successful, redirect to home without an error message
+        return redirect(reverse('home'))
+    else:
+        # Render the home template with an empty form
+        return render(request, 'home.html')
 
 
 
