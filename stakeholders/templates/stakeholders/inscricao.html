@@ -148,7 +148,7 @@
                 name="codigo_postal" value="{{ request.user.profile.codigo_postal }}">
             </div>
             <div class="mb-3" visually-hidden>
-              <input type="text" class="form-control" style="display:none;" placeholder="" aria-label="" id="idatividade"
+              <input type="text" class="form-control" placeholder="" style="display: none;" aria-label="" id="idatividade"
                 name="idatividade" value>
             </div>
             <button type="submit" class="btn btn-light mt-3">Registar</button>
@@ -234,8 +234,8 @@
                                 required="required" name="codigo_postal"
                                 value="{{ request.user.profile.codigo_postal }}">
                         </div>
-                        <div class="mb-3" visually-hidden>
-                            <input type="text" class="form-control" style="display:none;" placeholder="" aria-label="" id="idatividade" name="idatividade" value>
+                        <div class="mb-3">
+                          <input type="text" class="form-control" style="display: none;" id="idatividade1" name="idatividade1" value=>
                         </div>
                         <button type="submit" class="btn btn-light mt-3">Pré-Inscrição</button>
                     </form>
@@ -250,22 +250,23 @@
 <!-- Include the JavaScript/jQuery code -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function openModal(cursoID) {
-  var isLoggedIn = {{ request.user.is_authenticated|lower }};
-  // Example usage in JavaScript
-  if (isLoggedIn) {
-    // User is logged in
+  function openModal(cursoID) {
+    var isLoggedIn = {{ request.user.is_authenticated|lower }};
+  
     // Set the value of the input field
     $('#idatividade').val(cursoID);
-    // Show the modal for registered users
-    $('#myModal50').modal('show');
-  } else {
-    // User is not logged in
-    // Show the modal for login or registration
-    $('#idatividade').val(cursoID);
-    $('#loginModal1').modal('show');
+    $('#idatividade1').val(cursoID);
+  
+    if (isLoggedIn) {
+      // User is logged in
+      // Show the modal for registered users
+      $('#myModal50').modal('show');
+    } else {
+      // User is not logged in
+      // Show the modal for login or registration
+      $('#loginModal1').modal('show');
+    }
   }
-}
 </script>
 
 <script>
@@ -285,7 +286,7 @@ function openModal(cursoID) {
             // ...
 
             // Get the atividade value
-            var atividade = $('#idatividade').val();
+            var atividade = $('#idatividade1').val();
 
             // Refresh the page with the atividade value as a query parameter
             var url = window.location.href.split('?')[0] + '?atividade=' + atividade;
@@ -308,7 +309,7 @@ function openModal(cursoID) {
       var atividade = params.get('atividade');
 
       // Set the atividade value to the hidden input field
-      $('#idatividade').val(atividade);
+      $('#idatividade1').val(atividade);
       
       // Open the modal with the respective atividade
       $('#myModal50').modal('show');

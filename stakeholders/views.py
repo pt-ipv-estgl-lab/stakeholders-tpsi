@@ -242,12 +242,12 @@ def inscricao_view(request):
         user.profile.save()
 
         # Check if the user is already registered for the activity
-        existing_inscricao = Inscricao.objects.filter(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade')).first()
+        existing_inscricao = Inscricao.objects.filter(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade1')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
 
-        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade'))
+        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade1'))
         messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
 
         return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
