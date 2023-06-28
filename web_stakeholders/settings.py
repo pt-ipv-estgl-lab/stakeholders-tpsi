@@ -69,7 +69,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'web_stakeholders.wsgi.application'
 
 
 # Database
