@@ -39,41 +39,19 @@ Navigate to the project directory in your terminal or command prompt:
 Create a virtual environment and activate it:
 
 - python -m venv .venv # Create virtual environment
-- .venv/Scripts/activate # Activate virtual environment
+- .venv\Scripts\activate # Activate virtual environment
 
 Install the required dependencies from the `requirements.txt` file:
 
 - pip install -r requirements.txt
 
-Open the project folder in VS Code by running:
-
-- code .
-
-In VS Code, open the Command Palette (Ctrl+Shift+P) and select:
-
-- the virtual environment in your project folder that starts with ./.venv or .\.venv
-
 Update pip in the virtual environment by running the following command:
 
 - python -m pip install --upgrade pip
 
+Open the project folder in VS Code by running:
 
-Install Django in the virtual environment by running the following command:
-
-- python -m pip install django
-
-Install Pillow in the virtual environment by running the following command:
-
-- python -m pip install Pillow
-
-### Perform Migrations
-
-Run the necessary migrations for your Django project:
-
-- python manage.py makemigrations
-- python manage.py migrate
-- python manage.py collectstatic
-
+- code .
 
 ### Start the Development Server
 
@@ -83,4 +61,14 @@ Start the development server to run your Django project:
 
 Access the application at http://localhost:8000
 Create an account or log in with existing credentials.
+### Perform Migrations
+
+Run the necessary migrations for your Django project:
+
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py collectstatic
+
+
+
 
