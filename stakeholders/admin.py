@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import UnidadeOrganica, AtividadeFormativa, EventoCientifico, Servico, Profile, Participante, Inscricao
+from .models import Entidade, Servico, Evento, Participante, PreInscricao, PessoasDeContato, Formacao, Portefolio
 # Register your models here.
-admin.site.register(UnidadeOrganica)
-admin.site.register(AtividadeFormativa)
-admin.site.register(EventoCientifico)
+admin.site.register(Entidade)
 admin.site.register(Servico)
-admin.site.register(Profile)
+admin.site.register(Evento)
+admin.site.register(Formacao)
 admin.site.register(Participante)
-admin.site.register(Inscricao)
+admin.site.register(PessoasDeContato)
+admin.site.register(PreInscricao)
+admin.site.register(Portefolio)

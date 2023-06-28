@@ -18,6 +18,7 @@
       <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
       <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"></li>
       <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"></li>
+      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"></li>
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active" data-school="Escola Superior de Tecnologia e Gestão de Lamego">
@@ -27,36 +28,43 @@
           <p class="nome-escolas">Escola Superior de Tecnologia e Gestão de Lamego</p>
         </div>
       </div>
+      <div class="carousel-item" data-school="Instituto Politécnico de Viseu">
+        <img src="{% static 'stakeholders/img/IPVCUT.jpg' %}" class="d-block w-100" alt="Slide 2">
+        <div class="carousel-caption">
+          <h2>IPV</h2>
+          <p class="nome-escolas">Instituto Politécnico de Viseu</p>
+        </div>
+      </div>
       <div class="carousel-item" data-school="Escola Superior de Tecnologia e Gestao de Viseu">
-        <img src="{% static 'stakeholders/img/ESTGVCUT.jpg' %}" class="d-block w-100" alt="Slide 2">
+        <img src="{% static 'stakeholders/img/ESTGVCUT.jpg' %}" class="d-block w-100" alt="Slide 3">
         <div class="carousel-caption">
           <h2>ESTGV</h2>
           <p class="nome-escolas">Escola Superior de Tecnologia e Gestão de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior de Educação de Viseu">
-        <img src="{% static 'stakeholders/img/ESEVCUT.jpg' %}" class="d-block w-100" alt="Slide 3">
+        <img src="{% static 'stakeholders/img/ESEVCUT.jpg' %}" class="d-block w-100" alt="Slide 4">
         <div class="carousel-caption">
           <h2>ESEV</h2>
           <p class="nome-escolas">Escola Superior de Educação de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior de Saúde Viseu">
-        <img src="{% static 'stakeholders/img/ESSVCUT.jpg' %}" class="d-block w-100" alt="Slide 4">
+        <img src="{% static 'stakeholders/img/ESSVCUT.jpg' %}" class="d-block w-100" alt="Slide 5">
         <div class="carousel-caption">
           <h2>ESSV</h2>
           <p class="nome-escolas">Escola Superior de Saúde de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior Agrária de Viseu">
-        <img src="{% static 'stakeholders/img/ESAVCUT.jpg' %}" class="d-block w-100" alt="Slide 5">
+        <img src="{% static 'stakeholders/img/ESAVCUT.jpg' %}" class="d-block w-100" alt="Slide 6">
         <div class="carousel-caption">
           <h2>ESAV</h2>
           <p class="nome-escolas">Escola Superior Agrária de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Associação para o Desenvolvimento e Investigação de Viseu">
-        <img src="{% static 'stakeholders/img/ADIV.jpg' %}" class="d-block w-100" alt="Slide 6">
+        <img src="{% static 'stakeholders/img/ADIV.jpg' %}" class="d-block w-100" alt="Slide 7">
         <div class="carousel-caption">
           <h2>ADIV</h2>
           <p class="nome-escolas">Associação para o Desenvolvimento e Investigação de Viseu</p>
@@ -88,7 +96,7 @@
 <div class="container-cards cursoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for curso in cursos %}
-        <div class="col" data-escola="{{ curso.unidade_organica }}">
+        <div class="col" data-escola="{{ curso.entidade }}">
           <a href="#" data-bs-toggle="modal" data-bs-target="#myModalCursos{{ curso.id }}" class="card-link">
             <div class="card h-100">
               <div class="card-body" style="background-color: #550A21;">
@@ -127,7 +135,7 @@
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ curso.descricao }}</textarea>
             {% endif %}
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ curso.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ curso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ curso.local }}</textarea>
@@ -229,7 +237,7 @@
 <div class="container-cards formacoescontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for formacao in formacoes %}
-      <div class="col" data-escola="{{ formacao.unidade_organica }}">
+      <div class="col" data-escola="{{ formacao.encurso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalFormacao{{ formacao.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
@@ -267,7 +275,7 @@
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ formacao.descricao }}</textarea>
             {% endif %}
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ formacao.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ formacao.encurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ formacao.local }}</textarea>
@@ -364,7 +372,7 @@
 <div class="container-cards concursoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for concurso in concursos %}
-      <div class="col" data-escola="{{ concurso.unidade_organica }}">
+      <div class="col" data-escola="{{ concurso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalConcursos{{ concurso.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
@@ -403,7 +411,7 @@
             {% endif %}
 
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ concurso.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ concurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ concurso.local }}</textarea>
@@ -513,7 +521,7 @@
 <div class="container-cards palestrascontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for palestra in palestras %}
-      <div class="col" data-escola="{{ palestra.unidade_organica }}">
+      <div class="col" data-escola="{{ palestra.encurso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalPalestras{{ palestra.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
@@ -552,7 +560,7 @@
             {% endif %}
 
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ palestra.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ palestra.encurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ palestra.local }}</textarea>
@@ -663,7 +671,7 @@
 <div class="container-cards congressoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for congresso in congressos %}
-      <div class="col" data-escola="{{ congresso.unidade_organica }}">
+      <div class="col" data-escola="{{ congresso.encurso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalCongressos{{ congresso.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
@@ -703,7 +711,7 @@
             {% endif %}
 
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ congresso.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ congresso.encurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ congresso.local }}</textarea>
@@ -813,7 +821,7 @@
 <div class="container-cards seminarioscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for seminario in seminarios %}
-      <div class="col" data-escola="{{ seminario.unidade_organica }}">
+      <div class="col" data-escola="{{ seminario.encurso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalSeminario{{ seminario.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
@@ -852,7 +860,7 @@
             {% endif %}
 
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ seminario.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ seminario.encurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ seminario.local }}</textarea>
@@ -962,7 +970,7 @@
 <div class="container-cards servicoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for servico in servicos %}
-        <div class="col" data-escola="{{ servico.unidade_organica }}">
+        <div class="col" data-escola="{{ servico.encurso.entidade }}">
           <a href="#" data-bs-toggle="modal" data-bs-target="#myModalServicos{{ servico.id }}" class="card-link">
             <div class="card h-100">
               <div class="card-body" style="background-color: #550A21;">
@@ -1001,7 +1009,7 @@
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ servico.descricao }}</textarea>
             {% endif %}
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ servico.unidade_organica }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ servico.encurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ servico.local }}</textarea>

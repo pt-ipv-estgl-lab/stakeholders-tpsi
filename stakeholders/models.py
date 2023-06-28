@@ -1,99 +1,75 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class UnidadeOrganica(models.Model):
-    nome = models.TextField()
+class Entidade(models.Model):
+    designacao = models.TextField()
     morada = models.TextField()
-    contacto = models.TextField()
-    email = models.TextField()
+    codigo_postal = models.TextField()
+    contacto_telefonico = models.TextField()
+    email = models.EmailField()
 
     def __str__(self):
-        return self.nome
-      
-      
-class Atividade(models.Model):
-    AREAS_ATIVIDADE = (
-        ('Saúde', 'Saúde'),
-        ('Tecnologia', 'Tecnologia'),
-        ('Agricultura', 'Agricultura'),
-        ('Educação', 'Educação'),
-    	  ('Matemática', 'Matemática'),
-	      ('Outras', 'Outras'),
-    )
+        return self.designacao
 
-    nome = models.TextField()
-    descricao = models.TextField()
+class Atividade(models.Model):
+    designacao = models.TextField(blank=True)
+    descricao = models.TextField(blank=True)
     image = models.ImageField(upload_to='stakeholders/img/Atividades', blank=True)
+    custo = models.TextField(blank=True)
+    pessoa_de_contato = models.TextField(blank=True)
+    email = models.EmailField(blank=True)
+    entidade = models.ForeignKey(Entidade, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.designacao
+
+class Evento(Atividade):
+    local = models.TextField(blank=True)
+    gps = models.TextField(blank=True)
     data_inicio = models.DateField()
     data_fim = models.DateField()
-    area = models.CharField(max_length=20, choices=AREAS_ATIVIDADE,default='Tecnologia') 
-    local = models.TextField(blank=True)
-    objetivos = models.TextField(blank=True)
-    custos = models.TextField(blank=True)
+    objetivo = models.TextField(blank=True)
     publico_alvo = models.TextField(blank=True)
-    contacto = models.TextField(blank=True)
-    email = models.TextField(blank=True)
-    unidade_organica = models.ForeignKey(UnidadeOrganica, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.nome
-
-
-class AtividadeFormativa(Atividade):
-    TIPOS_ATIVIDADE = (
-        ('C', 'Curso'),
-        ('F', 'Formacao'),
-    )
+    data_inicio_inscricao = models.DateField()
     data_limite_inscricao = models.DateField()
-    responsavel = models.TextField()
-    tipodeatividade = models.CharField(max_length=2, choices=TIPOS_ATIVIDADE,default='C')
-    certificacao = models.TextField(blank=True)
-    programa = models.TextField(blank=True)
-    duracao = models.TextField(blank=True)
     vagas = models.TextField(blank=True)
-    edicao = models.TextField(blank=True)
-    requisitos = models.TextField(blank=True)
-    horario = models.TextField(blank=True)
-    fases = models.TextField(blank=True)
-    regime = models.TextField(blank=True)
+    TIPO_CHOICES = [
+    ('C', 'Curso'),
+    ('F', 'Formacao'),
+    ('CO', 'Congresso'),
+    ('PA', 'Palestra'),
+    ('SE', 'Seminario'),
+    ('CN', 'Concurso'),
+]
+    tipoevento = models.CharField(max_length=2, choices=TIPO_CHOICES)
 
     def __str__(self):
-        return self.nome
+        return f"Evento: {self.designacao}"
 
-class EventoCientifico(Atividade):
-    TIPOS_EVENTO = (
-        ('CO', 'Congresso'),
-        ('PA', 'Palestra'),
-        ('SE', 'Seminario'),
-        ('CN', 'Concurso'),
-    )
+class Formacao(Evento):
+    TIPO_CHOICES = [
+    ('PG', 'PosGraduacao'),
+    ('LI', 'Licenciatura'),
+    ('ME', 'Mestrado'),
+    ('DO', 'Doutoramento'),
 
-    tipodeevento = models.CharField(max_length=2, choices=TIPOS_EVENTO,default='CO')
-    data_limite_inscricao = models.DateField()
-    programa = models.TextField(blank=True)
-    duracao = models.TextField(blank=True)
-    vagas = models.TextField(blank=True)
-    horario = models.TextField(blank=True)
-    agenda = models.TextField(blank=True)
-    alojamento = models.TextField(blank=True)
-    local_alojamento = models.TextField(blank=True)
-    orador = models.TextField(blank=True)
-    moderador = models.TextField(blank=True)
-    data_submissao_resumos = models.TextField(blank=True)
-    data_notificacao_resumos = models.TextField(blank=True)
-    link = models.TextField(blank=True)
-    parcerias = models.TextField(blank=True)
-    numero_elementos_equipa = models.TextField(blank=True)
+]
+    tipo = models.CharField(max_length=2, choices=TIPO_CHOICES)
+    TIPO_ALUNO_CHOICES = [
+        ('IJ', 'ImpulsoJovem'),
+        ('IA', 'ImpulsoAdulto'),
+        ('AM', 'Ambos'),
+    ]
+    tipo_de_aluno = models.CharField(max_length=2, choices=TIPO_ALUNO_CHOICES)
+    ects = models.TextField(blank=True)
 
     def __str__(self):
-        return self.nome
+        return f"Formacao: {self.designacao}"
 
-class Servico(Atividade):
-    pass
-
-class Profile(models.Model):
+class Participante(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nome_completo = models.TextField(blank=True)
+    nomes_do_meio = models.TextField(blank=True)
+    data_nascimento = models.DateField(blank=True)
     nif = models.TextField(blank=True)
     morada = models.TextField(blank=True)
     codigo_postal = models.TextField(blank=True)
@@ -101,57 +77,59 @@ class Profile(models.Model):
     concelho = models.TextField(blank=True)
     distrito = models.TextField(blank=True)
     contacto = models.TextField(blank=True)
-    atividades = models.ManyToManyField(Atividade, through='Inscricao')
+    atividades = models.ManyToManyField(Evento, through='PreInscricao')
 
     def __str__(self):
         return self.user.username
 
-
-class Participante(Profile):
-    GENDER_CHOICES = (
-        ('E', 'Escolha Uma'),
-        ('M', 'Masculino'),
-        ('F', 'Feminino'),
-        ('O', 'Outro')
-    )
-
-    ACADEMIC_CHOICES = (
-        ('E', 'Escolha Uma'),
-        ('4', '4º ano'),
-        ('9', '9º ano'),
-        ('12', '12º ano'),
-        ('L', 'Licenciatura'),
-        ('M', 'Mestrado'),
-        ('D', 'Doutoramento'),
-    )
-
-    EMPLOYMENT_CHOICES = (
-        ('E', 'Escolha Uma'),
-        ('ES', 'Estudante - Secundário'),
-        ('EL', 'Estudante - Licenciatura'),
-        ('EO', 'Estudante - Outra'),
-        ('TP', 'Trabalhador por conta própria'),
-        ('TO', 'Trabalhador por conta de outrem'),
-        ('DE', 'Desempregado'),
-        ('O', 'Outra'),
-    )
-
-    genero = models.CharField(max_length=1, choices=GENDER_CHOICES,default='E')
-    nacionalidade = models.TextField()
-    data_nascimento = models.DateField()
-    formacao_academica = models.CharField(max_length=2, choices=ACADEMIC_CHOICES,default='E')
-    atividade_profissional = models.CharField(max_length=2, choices=EMPLOYMENT_CHOICES,default='E')
+class PreInscricao(models.Model):
+    participante = models.ForeignKey(Participante, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    data_pre_inscricao = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Participante: {self.user.username}"
+        return f"PreInscricao - {self.participante.user.username} - {self.evento.atividade.designacao}"
 
-class Inscricao(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True)
+
+class Stakeholder(models.Model):
+    nome = models.TextField(blank=True)
+    morada = models.TextField(blank=True)
+    codigo_postal = models.TextField(blank=True)
+    contacto_telefonico = models.TextField(blank=True)
+    email = models.EmailField(blank=True)
+    pessoa_de_contato = models.TextField(blank=True)
+    entidade = models.ForeignKey(Entidade, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Inscrição: {self.pk}"
+        return self.nome
+    
+class PessoasDeContato(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contato_telefonico = models.TextField(blank=True)
+    stakeholder = models.ForeignKey(Stakeholder, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+class Servico(Atividade):
+    detalhes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"Servico: {self.designacao}"
+
+class Portefolio(models.Model):
+    stakeholder = models.ForeignKey(Stakeholder, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
+    data_de_inicio = models.DateField()
+    data_de_fim = models.DateField()
+    imagens_de_referencia = models.ImageField(upload_to='stakeholders/img/Servicos', blank=True)
+    detalhes = models.TextField(blank=True)
+    publico = models.BooleanField(blank=True)
+    data_de_requisicao = models.DateField()
+
+    def __str__(self):
+        return f"Portefolio ({self.stakeholder.nome} - {self.servico.designacao})"
+
 
 
 

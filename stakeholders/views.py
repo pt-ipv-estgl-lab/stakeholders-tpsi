@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import AtividadeFormativa, EventoCientifico, Servico, Profile, Atividade, Inscricao
+from .models import Servico, Participante, PreInscricao, Evento
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,12 +15,12 @@ def home(request):
     login_failed = request.GET.get('login_failed', False)
     register_failed = request.GET.get('register_failed', False)
     servicos = Servico.objects.all()
-    cursos = AtividadeFormativa.objects.filter(tipodeatividade='C')
-    formacoes = AtividadeFormativa.objects.filter(tipodeatividade='F')
-    congressos = EventoCientifico.objects.filter(tipodeevento='CO')
-    concursos = EventoCientifico.objects.filter(tipodeevento='CN')
-    palestras = EventoCientifico.objects.filter(tipodeevento='PA')
-    seminarios = EventoCientifico.objects.filter(tipodeevento='SE')
+    cursos = Evento.objects.filter(tipoevento='C')
+    formacoes = Evento.objects.filter(tipoevento='F')
+    congressos = Evento.objects.filter(tipoevento='CO')
+    concursos = Evento.objects.filter(tipoevento='CN')
+    palestras = Evento.objects.filter(tipoevento='PA')
+    seminarios = Evento.objects.filter(tipoevento='SE')
     
     context = {
         'login_failed': login_failed,
@@ -85,7 +85,7 @@ def sign_up(request):
         user = User.objects.create_user(username=username, email=email, password=password1)
 
         # Create a profile for the user with all fields blank
-        profile = Profile.objects.create(user=user, nome_completo='', nif='', morada='',
+        participante = Participante.objects.create(user=user, nomes_do_meio='', nif='', morada='',
                                          codigo_postal='', freguesia='', concelho='',
                                          distrito='', contacto='')
 
@@ -115,36 +115,36 @@ def profile_view(request):
             user.last_name = request.POST.get('last_name')
             updated_fields.append('Último Nome')
 
-        if user.profile.nome_completo != request.POST.get('nome_completo'):
-            user.profile.nome_completo = request.POST.get('nome_completo')
+        if user.participante.nomes_do_meio != request.POST.get('nomes_do_meio'):
+            user.participante.nomes_do_meio = request.POST.get('nomes_do_meio')
             updated_fields.append('Nome Completo')
 
-        if user.profile.nif != request.POST.get('nif'):
-            user.profile.nif = request.POST.get('nif')
+        if user.participante.nif != request.POST.get('nif'):
+            user.participante.nif = request.POST.get('nif')
             updated_fields.append('Nif')
 
-        if user.profile.morada != request.POST.get('morada'):
-            user.profile.morada = request.POST.get('morada')
+        if user.participante.morada != request.POST.get('morada'):
+            user.participante.morada = request.POST.get('morada')
             updated_fields.append('Morada')
 
-        if user.profile.codigo_postal != request.POST.get('codigo_postal'):
-            user.profile.codigo_postal = request.POST.get('codigo_postal')
+        if user.participante.codigo_postal != request.POST.get('codigo_postal'):
+            user.participante.codigo_postal = request.POST.get('codigo_postal')
             updated_fields.append('Código Postal')
 
-        if user.profile.freguesia != request.POST.get('freguesia'):
-            user.profile.freguesia = request.POST.get('freguesia')
+        if user.participante.freguesia != request.POST.get('freguesia'):
+            user.participante.freguesia = request.POST.get('freguesia')
             updated_fields.append('Freguesia')
 
-        if user.profile.concelho != request.POST.get('concelho'):
-            user.profile.concelho = request.POST.get('concelho')
+        if user.participante.concelho != request.POST.get('concelho'):
+            user.participante.concelho = request.POST.get('concelho')
             updated_fields.append('Concelho')
 
-        if user.profile.distrito != request.POST.get('distrito'):
-            user.profile.distrito = request.POST.get('distrito')
+        if user.participante.distrito != request.POST.get('distrito'):
+            user.participante.distrito = request.POST.get('distrito')
             updated_fields.append('Distrito')
 
-        if user.profile.contacto != request.POST.get('contacto'):
-            user.profile.contacto = request.POST.get('contacto')
+        if user.participante.contacto != request.POST.get('contacto'):
+            user.participante.contacto = request.POST.get('contacto')
             updated_fields.append('Contacto')
 
         # Change password
@@ -177,7 +177,7 @@ def profile_view(request):
             
         # Save the changes to the user and profile models
         user.save()
-        user.profile.save()
+        user.participante.save()
 
         # Redirect to a different page after processing the form
         return redirect('profile')  # Assuming 'profile' is the name of the URL pattern for the profile view
@@ -191,23 +191,23 @@ def profile_view(request):
     email = user.email
 
     # Access the additional fields from the user profile model
-    profile = user.profile
+    participante = user.participante
 
-    nome_completo = profile.nome_completo
-    nif = profile.nif
-    morada = profile.morada
-    codigo_postal = profile.codigo_postal
-    freguesia = profile.freguesia
-    concelho = profile.concelho
-    distrito = profile.distrito
-    contacto = profile.contacto
+    nomes_do_meio = participante.nomes_do_meio
+    nif = participante.nif
+    morada = participante.morada
+    codigo_postal = participante.codigo_postal
+    freguesia = participante.freguesia
+    concelho = participante.concelho
+    distrito = participante.distrito
+    contacto = participante.contacto
 
     context = {
         'username': username,
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
-        'nome_completo': nome_completo,
+        'nomes_do_meio': nomes_do_meio,
         'nif': nif,
         'morada': morada,
         'codigo_postal': codigo_postal,
@@ -229,25 +229,25 @@ def inscricao_view(request):
         user.email = request.POST.get('email')
 
         # Update the profile fields with the submitted form data
-        user.profile.nome_completo = request.POST.get('nome_completo')
-        user.profile.nif = request.POST.get('nif')
-        user.profile.morada = request.POST.get('morada')
-        user.profile.codigo_postal = request.POST.get('codigo_postal')
-        user.profile.freguesia = request.POST.get('freguesia')
-        user.profile.concelho = request.POST.get('concelho')
-        user.profile.distrito = request.POST.get('distrito')
-        user.profile.contacto = request.POST.get('contacto')
+        user.participante.nomes_do_meio = request.POST.get('nomes_do_meio')
+        user.participante.nif = request.POST.get('nif')
+        user.participante.morada = request.POST.get('morada')
+        user.participante.codigo_postal = request.POST.get('codigo_postal')
+        user.participante.freguesia = request.POST.get('freguesia')
+        user.participante.concelho = request.POST.get('concelho')
+        user.participante.distrito = request.POST.get('distrito')
+        user.participante.contacto = request.POST.get('contacto')
 
         user.save()
-        user.profile.save()
+        user.participante.save()
 
         # Check if the user is already registered for the activity
-        existing_inscricao = Inscricao.objects.filter(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade1')).first()
+        existing_inscricao = PreInscricao.objects.filter(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade1')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
 
-        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade1'))
+        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade1'))
         messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
 
         return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
@@ -300,19 +300,19 @@ def inscricaoregisto_view(request):
         user = User.objects.create_user(username=username, email=email, password=password1, first_name=first, last_name=last)
 
         # Create a profile for the user with all fields blank
-        profile = Profile.objects.create(user=user, nome_completo=request.POST.get('nome_completo'), nif=request.POST.get('nif'), morada=request.POST.get('morada'),
+        participante = Participante.objects.create(user=user, nomes_do_meio=request.POST.get('nomes_do_meio'), nif=request.POST.get('nif'), morada=request.POST.get('morada'),
                                          codigo_postal=request.POST.get('codigo_postal'), freguesia= request.POST.get('freguesia'), concelho=request.POST.get('concelho'),
                                          distrito=request.POST.get('distrito'), contacto=request.POST.get('contacto'))
 
         # Log in the user
         login(request, user)
         
-        existing_inscricao = Inscricao.objects.filter(profile_id=profile.id, atividade_id=request.POST.get('idatividade')).first()
+        existing_inscricao = PreInscricao.objects.filter(participante_id=participante.id, atividade_id=request.POST.get('idatividade')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
 
-        inscricao = Inscricao.objects.create(profile_id=user.profile.id, atividade_id=request.POST.get('idatividade'))
+        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade'))
         messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
 
         # Registration successful, redirect to home without an error message
