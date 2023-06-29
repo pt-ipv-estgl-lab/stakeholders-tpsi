@@ -16,25 +16,7 @@
 				<h3>Perfil</h3>
 				<hr>
 			</div>
-      {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% elif message.tags == 'error' %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% endif %}
-        {% endfor %}
-      {% endif %}
+
 
 			<!-- Form START -->
 			<form class="file-upload" method="POST" id="profile-form">
@@ -65,9 +47,15 @@
 
                 <!-- Nome Completo -->
                 <div class="col-md-6">
-                    <label class="form-label">Nome Completo *</label>
-                    <input type="text" class="form-control" placeholder="" aria-label="Nome Completo" name="nome_completo" required="required" value="{{ request.user.participante.nomes_do_meio }}">
-                </div>
+                  <label class="form-label">Nome Completo *</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" required="required" value="{{ user.first_name }}" readonly>
+                      <input type="text" class="form-control" placeholder="Nomes do Meio" aria-label="Nomes do Meio" name="nomes_do_meio" required="required" value="{{ request.user.participante.nomes_do_meio }}">
+                      <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome" required="required" value="{{ user.last_name }}" readonly>
+                  </div>
+              </div>
+              
+              
 
                 <!-- Nif -->
                 <div class="col-md-6">

@@ -70,7 +70,7 @@ class Formacao(Evento):
 class Participante(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nomes_do_meio = models.TextField(blank=True)
-    data_nascimento = models.DateField(blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
     nif = models.TextField(blank=True)
     morada = models.TextField(blank=True)
     codigo_postal = models.TextField(blank=True)
@@ -132,5 +132,16 @@ class Portefolio(models.Model):
         return f"Portefolio ({self.stakeholder.nome} - {self.servico.designacao})"
 
 
+class Oferta(models.Model):
+    nome_empresa = models.TextField(blank=True)
+    morada = models.TextField(blank=True)
+    codigo_postal = models.TextField(blank=True)
+    contacto_telefonico = models.TextField(blank=True)
+    email = models.EmailField(blank=True)
+    entidade = models.ForeignKey(Entidade, on_delete=models.CASCADE)
+    descricao = models.TextField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.nome_empresa
 

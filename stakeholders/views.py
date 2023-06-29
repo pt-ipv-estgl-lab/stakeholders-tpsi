@@ -1,10 +1,12 @@
+from datetime import date
 from django.contrib.auth import authenticate, login, logout
+from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Servico, Participante, PreInscricao, Evento
+from .models import Entidade, Servico, Participante, PreInscricao, Evento, Oferta
 from django.contrib.auth.decorators import login_required
 
 
@@ -323,3 +325,76 @@ def inscricaoregisto_view(request):
 
 
 
+def requisitar_view(request):
+    if request.method == 'POST':
+        # Get form data
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+
+        # Check if username is already taken
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Esse nome de utilizador já existe.')
+            return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+
+        try:
+            # Create new user
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+
+            # Log in the user
+            auth_user = authenticate(request, username=username, password=password)
+            if auth_user:
+                login(request, auth_user)
+            else:
+                messages.error(request, 'Não foi possível realizar o login.')
+                return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+        except Exception:
+            messages.error(request, 'Ocorreu um erro com o seu pedido, por favor volte a tentar')
+            return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+
+
+        # Create a profile for the user with all fields blank
+        participante = Participante.objects.create(user=user, nomes_do_meio='', nif='', morada='',
+                                         codigo_postal='', freguesia='', concelho='',
+                                         distrito='', contacto='',data_nascimento=date.today())
+        
+        
+        # Create new oferta
+        nome_empresa = request.POST.get('nome_empresa')
+        morada = request.POST.get('morada')
+        codigo_postal = request.POST.get('codigo_postal')
+        contacto_telefonico = request.POST.get('contacto_telefonico')
+        entidade_id = request.POST.get('entidade_id')
+        descricao = request.POST.get('descricao')
+
+        oferta = Oferta(
+            nome_empresa=nome_empresa,
+            morada=morada,
+            codigo_postal=codigo_postal,
+            contacto_telefonico=contacto_telefonico,
+            email=email,
+            entidade_id=entidade_id,
+            descricao=descricao,
+            user=user
+        )
+        oferta.save()
+
+        messages.success(request, 'Requisição Enviada com Sucesso')
+        return redirect('requisitar')  # Replace 'requisitar' with the URL name of your success page
+
+    # Get all Entidade objects
+    entidades = Entidade.objects.all()
+
+    context = {
+        'entidades': entidades
+    }
+
+    return render(request, 'stakeholders/requisitar.html', context)
