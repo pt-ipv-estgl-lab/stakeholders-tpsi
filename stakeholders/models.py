@@ -52,6 +52,7 @@ class Formacao(Evento):
     ('LI', 'Licenciatura'),
     ('ME', 'Mestrado'),
     ('DO', 'Doutoramento'),
+    ('OU', 'Outros'),
 
 ]
     tipo = models.CharField(max_length=2, choices=TIPO_CHOICES)

@@ -25,49 +25,49 @@
         <img src="{% static 'stakeholders/img/ESTGLCUT.jpg' %}" class="d-block w-100" alt="Slide 1">
         <div class="carousel-caption">
           <h2>ESTGL</h2>
-          <p class="nome-escolas">Escola Superior de Tecnologia e Gestão de Lamego</p>
+          <p class="designacao-escolas">Escola Superior de Tecnologia e Gestão de Lamego</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Instituto Politécnico de Viseu">
         <img src="{% static 'stakeholders/img/IPVCUT.jpg' %}" class="d-block w-100" alt="Slide 2">
         <div class="carousel-caption">
           <h2>IPV</h2>
-          <p class="nome-escolas">Instituto Politécnico de Viseu</p>
+          <p class="designacao-escolas">Instituto Politécnico de Viseu</p>
         </div>
       </div>
-      <div class="carousel-item" data-school="Escola Superior de Tecnologia e Gestao de Viseu">
+      <div class="carousel-item" data-school="Escola Superior de Tecnologia e Gestão de Viseu">
         <img src="{% static 'stakeholders/img/ESTGVCUT.jpg' %}" class="d-block w-100" alt="Slide 3">
         <div class="carousel-caption">
           <h2>ESTGV</h2>
-          <p class="nome-escolas">Escola Superior de Tecnologia e Gestão de Viseu</p>
+          <p class="designacao-escolas">Escola Superior de Tecnologia e Gestão de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior de Educação de Viseu">
         <img src="{% static 'stakeholders/img/ESEVCUT.jpg' %}" class="d-block w-100" alt="Slide 4">
         <div class="carousel-caption">
           <h2>ESEV</h2>
-          <p class="nome-escolas">Escola Superior de Educação de Viseu</p>
+          <p class="designacao-escolas">Escola Superior de Educação de Viseu</p>
         </div>
       </div>
-      <div class="carousel-item" data-school="Escola Superior de Saúde Viseu">
+      <div class="carousel-item" data-school="Escola Superior de Saúde de Viseu">
         <img src="{% static 'stakeholders/img/ESSVCUT.jpg' %}" class="d-block w-100" alt="Slide 5">
         <div class="carousel-caption">
           <h2>ESSV</h2>
-          <p class="nome-escolas">Escola Superior de Saúde de Viseu</p>
+          <p class="designacao-escolas">Escola Superior de Saúde de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior Agrária de Viseu">
         <img src="{% static 'stakeholders/img/ESAVCUT.jpg' %}" class="d-block w-100" alt="Slide 6">
         <div class="carousel-caption">
           <h2>ESAV</h2>
-          <p class="nome-escolas">Escola Superior Agrária de Viseu</p>
+          <p class="designacao-escolas">Escola Superior Agrária de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Associação para o Desenvolvimento e Investigação de Viseu">
         <img src="{% static 'stakeholders/img/ADIV.jpg' %}" class="d-block w-100" alt="Slide 7">
         <div class="carousel-caption">
           <h2>ADIV</h2>
-          <p class="nome-escolas">Associação para o Desenvolvimento e Investigação de Viseu</p>
+          <p class="designacao-escolas">Associação para o Desenvolvimento e Investigação de Viseu</p>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@
           <a href="#" data-bs-toggle="modal" data-bs-target="#myModalCursos{{ curso.id }}" class="card-link">
             <div class="card h-100">
               <div class="card-body" style="background-color: #550A21;">
-                <h5 class="card-title" style="color: white;">{{ curso.nome }}</h5>
+                <h5 class="card-title" style="color: white;">{{ curso.designacao }}</h5>
               </div>
               <div class="card-footer">
                 <small class="text-muted">
@@ -125,7 +125,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ curso.nome }}</h1>
+            <h1 class="text-center">{{ curso.designacao }}</h1>
           </div>
           <div class="curso-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if curso.image %}
@@ -237,11 +237,11 @@
 <div class="container-cards formacoescontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for formacao in formacoes %}
-      <div class="col" data-escola="{{ formacao.encurso.entidade }}">
+      <div class="col" data-escola="{{ formacao.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalFormacao{{ formacao.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
-              <h5 class="card-title" style="color: white;">{{ formacao.nome }}</h5>
+              <h5 class="card-title" style="color: white;">{{ formacao.designacao }}</h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -265,7 +265,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ formacao.nome }}</h1>
+            <h1 class="text-center">{{ formacao.designacao }}</h1>
           </div>
           <div class="formacao-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if formacao.image %}
@@ -376,7 +376,7 @@
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalConcursos{{ concurso.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
-              <h5 class="card-title" style="color: white;">{{ concurso.nome }}</h5>
+              <h5 class="card-title" style="color: white;">{{ concurso.designacao }}</h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -400,7 +400,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ concurso.nome }}</h1>
+            <h1 class="text-center">{{ concurso.designacao }}</h1>
           </div>
           <div class="concurso-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if concurso.image %}
@@ -521,11 +521,11 @@
 <div class="container-cards palestrascontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for palestra in palestras %}
-      <div class="col" data-escola="{{ palestra.encurso.entidade }}">
+      <div class="col" data-escola="{{ palestra.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalPalestras{{ palestra.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
-              <h5 class="card-title" style="color: white;">{{ palestra.nome }}</h5>
+              <h5 class="card-title" style="color: white;">{{ palestra.designacao }}</h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -549,7 +549,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ palestra.nome }}</h1>
+            <h1 class="text-center">{{ palestra.designacao }}</h1>
           </div>
           <div class="palestra-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if palestra.image %}
@@ -671,11 +671,11 @@
 <div class="container-cards congressoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for congresso in congressos %}
-      <div class="col" data-escola="{{ congresso.encurso.entidade }}">
+      <div class="col" data-escola="{{ congresso.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalCongressos{{ congresso.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
-              <h5 class="card-title" style="color: white;">{{ congresso.nome }}</h5>
+              <h5 class="card-title" style="color: white;">{{ congresso.designacao }}</h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -700,7 +700,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ congresso.nome }}</h1>
+            <h1 class="text-center">{{ congresso.designacao }}</h1>
           </div>
           <div class="congresso-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if congresso.image %}
@@ -821,11 +821,11 @@
 <div class="container-cards seminarioscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for seminario in seminarios %}
-      <div class="col" data-escola="{{ seminario.encurso.entidade }}">
+      <div class="col" data-escola="{{ seminario.entidade }}">
         <a href="#" data-bs-toggle="modal" data-bs-target="#myModalSeminario{{ seminario.id }}" class="card-link">
           <div class="card h-100">
             <div class="card-body" style="background-color: #550A21;">
-              <h5 class="card-title" style="color: white;">{{ seminario.nome }}</h5>
+              <h5 class="card-title" style="color: white;">{{ seminario.designacao }}</h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -849,7 +849,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ seminario.nome }}</h1>
+            <h1 class="text-center">{{ seminario.designacao }}</h1>
           </div>
           <div class="seminario-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if seminario.image %}
@@ -970,11 +970,11 @@
 <div class="container-cards servicoscontainer">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for servico in servicos %}
-        <div class="col" data-escola="{{ servico.encurso.entidade }}">
+        <div class="col" data-escola="{{ servico.entidade }}">
           <a href="#" data-bs-toggle="modal" data-bs-target="#myModalServicos{{ servico.id }}" class="card-link">
             <div class="card h-100">
               <div class="card-body" style="background-color: #550A21;">
-                <h5 class="card-title" style="color: white;">{{ servico.nome }}</h5>
+                <h5 class="card-title" style="color: white;">{{ servico.designacao }}</h5>
               </div>
               <div class="card-footer">
                 <small class="text-muted">
@@ -999,7 +999,7 @@
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
-            <h1 class="text-center">{{ servico.nome }}</h1>
+            <h1 class="text-center">{{ servico.designacao }}</h1>
           </div>
           <div class="servico-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if servico.image %}
