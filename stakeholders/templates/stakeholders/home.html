@@ -140,11 +140,17 @@
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ curso.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ curso.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ curso.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ curso.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ curso.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ curso.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ curso.data_inicio }}</textarea>
@@ -152,56 +158,37 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ curso.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ curso.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ curso.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ curso.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ curso.publico_alvo }}</textarea>
 
-            <!-- Campos Atividades Formativas --> 
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ curso.data_inicio_inscricao }}</textarea>
 
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ curso.data_limite_inscricao }}</textarea>
-
-            <label for="id_responsavel" class="form-label" style="align-self: flex-start;font-weight: bold;">Responsável</label>
-            <textarea class="form-control" id="id_responsavel" name="responsavel" required="required" readonly>{{ curso.responsavel }}</textarea>
-
-            <label for="id_tipodeatividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Atividade</label>
-            <textarea class="form-control" id="id_tipodeatividade" name="tipodeatividade" required="required" readonly>Curso</textarea>
-
-            <label for="id_certificacao" class="form-label" style="align-self: flex-start;font-weight: bold;">Certificação</label>
-            <textarea class="form-control" id="id_certificacao" name="certificacao" readonly>{{ curso.certificacao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ curso.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ curso.duracao }}</textarea>            
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ curso.vagas }}</textarea>
 
-            <label for="id_edicao" class="form-label" style="align-self: flex-start;font-weight: bold;">Edição</label>
-            <textarea class="form-control" id="id_edicao" name="edicao" readonly>{{ curso.edicao }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ curso.get_tipoevento_display }}</textarea>
 
-            <label for="id_requisitos" class="form-label" style="align-self: flex-start;font-weight: bold;">Requisitos</label>
-            <textarea class="form-control" id="id_requisitos" name="requisitos" readonly>{{ curso.requisitos }}</textarea>
+            <!-- Campos Formações --> 
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ curso.horario }}</textarea>
+            <label for="id_tipo" class="form-label" style="align-self: flex-start; font-weight: bold;">Nível Académico</label>
+            <textarea class="form-control" id="id_tipo" name="tipo" required="required" readonly>{{ curso.formacao.get_tipo_display }}</textarea>
 
-            <label for="id_fases" class="form-label" style="align-self: flex-start;font-weight: bold;">Fases</label>
-            <textarea class="form-control" id="id_fases" name="fases" readonly>{{ curso.fases }}</textarea>
 
-            <label for="id_regime" class="form-label" style="align-self: flex-start;font-weight: bold;">Regime</label>
-            <textarea class="form-control" id="id_regime" name="regime" readonly>{{ curso.regime }}</textarea>
-          
+            <label for="id_tipo_de_aluno" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Programa</label>
+            <textarea class="form-control" id="id_tipo_de_aluno" name="tipo_de_aluno" required="required" readonly>{{ curso.formacao.get_tipo_de_aluno_display }}</textarea>
+            
+            
+            <label for="id_ects" class="form-label" style="align-self: flex-start; font-weight: bold;">Créditos</label>
+            <textarea class="form-control" id="id_ects" name="ects" required="required" readonly>{{ curso.formacao.ects }}</textarea>
+
             <button
               id="registerButton"
               type="button"
@@ -261,13 +248,13 @@
 <div class="modal fade" id="myModalFormacao{{ formacao.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content" style="width: 80%; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-      <div class="formacao-modal-body" style="width: 600px;">
+      <div class= formacao-modal-body" style="width: 600px;">
         <div class="myform bg-dark">
           <div style="display: flex; flex-direction: row;">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
             <h1 class="text-center">{{ formacao.designacao }}</h1>
           </div>
-          <div class="formacao-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div class= formacao-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if formacao.image %}
               <img src="{% static formacao.image.url %}" alt="" style="width: 500px; height=100%; border-radius:5px;">
             {% else %}
@@ -275,16 +262,22 @@
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ formacao.descricao }}</textarea>
             {% endif %}
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ formacao.encurso.entidade }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ formacao.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ formacao.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ formacao.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ formacao.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ formacao.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ formacao.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ formacao.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ formacao.data_inicio }}</textarea>
@@ -292,65 +285,47 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ formacao.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ formacao.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ formacao.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ formacao.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ formacao.publico_alvo }}</textarea>
 
-            <!-- Campos Atividades Formativas --> 
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ formacao.data_inicio_inscricao }}</textarea>
 
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ formacao.data_limite_inscricao }}</textarea>
-
-            <label for="id_responsavel" class="form-label" style="align-self: flex-start;font-weight: bold;">Responsável</label>
-            <textarea class="form-control" id="id_responsavel" name="responsavel" required="required" readonly>{{ formacao.responsavel }}</textarea>
-
-            <label for="id_tipodeatividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Atividade</label>
-            <textarea class="form-control" id="id_tipodeatividade" name="tipodeatividade" required="required" readonly>Formação</textarea>
-
-            <label for="id_certificacao" class="form-label" style="align-self: flex-start;font-weight: bold;">Certificação</label>
-            <textarea class="form-control" id="id_certificacao" name="certificacao" readonly>{{ formacao.certificacao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ formacao.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ formacao.duracao }}</textarea>            
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ formacao.vagas }}</textarea>
 
-            <label for="id_edicao" class="form-label" style="align-self: flex-start;font-weight: bold;">Edição</label>
-            <textarea class="form-control" id="id_edicao" name="edicao" readonly>{{ formacao.edicao }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ formacao.get_tipoevento_display }}</textarea>
 
-            <label for="id_requisitos" class="form-label" style="align-self: flex-start;font-weight: bold;">Requisitos</label>
-            <textarea class="form-control" id="id_requisitos" name="requisitos" readonly>{{ formacao.requisitos }}</textarea>
+            <!-- Campos Formações --> 
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ formacao.horario }}</textarea>
+            <label for="id_tipo" class="form-label" style="align-self: flex-start; font-weight: bold;">Nível Académico</label>
+            <textarea class="form-control" id="id_tipo" name="tipo" required="required" readonly>{{ formacao.formacao.get_tipo_display }}</textarea>
 
-            <label for="id_fases" class="form-label" style="align-self: flex-start;font-weight: bold;">Fases</label>
-            <textarea class="form-control" id="id_fases" name="fases" readonly>{{ formacao.fases }}</textarea>
 
-            <label for="id_regime" class="form-label" style="align-self: flex-start;font-weight: bold;">Regime</label>
-            <textarea class="form-control" id="id_regime" name="regime" readonly>{{ formacao.regime }}</textarea>
-          
+            <label for="id_tipo_de_aluno" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Programa</label>
+            <textarea class="form-control" id="id_tipo_de_aluno" name="tipo_de_aluno" required="required" readonly>{{ formacao.formacao.get_tipo_de_aluno_display }}</textarea>
+            
+            
+            <label for="id_ects" class="form-label" style="align-self: flex-start; font-weight: bold;">Créditos</label>
+            <textarea class="form-control" id="id_ects" name="ects" required="required" readonly>{{ formacao.formacao.ects }}</textarea>
+
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ formacao.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ formacao.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -409,18 +384,23 @@
               <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ concurso.descricao }}</textarea>
             {% endif %}
-
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
             <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ concurso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ concurso.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ concurso.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ concurso.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ concurso.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ concurso.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ concurso.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ concurso.data_inicio }}</textarea>
@@ -428,78 +408,34 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ concurso.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ concurso.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ concurso.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ concurso.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ concurso.publico_alvo }}</textarea>
 
-            <!-- Campos Eventos Científicos -->
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ concurso.data_inicio_inscricao }}</textarea>
 
-            <label for="id_tipodeevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
-            <textarea class="form-control" id="id_tipodeevento" name="id_tipodeevento" required="required" readonly>Concurso</textarea>
-
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ concurso.data_limite_inscricao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ concurso.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ concurso.duracao }}</textarea>   
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ concurso.vagas }}</textarea>
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ concurso.horario }}</textarea>
-
-            <label for="id_local_alojamento" class="form-label" style="align-self: flex-start; font-weight: bold;">Local do Alojamento</label>
-            <textarea class="form-control" id="id_local_alojamento" name="local_alojamento" required="required" readonly>{{ concurso.local_alojamento }}</textarea>
-
-            <label for="id_agenda" class="form-label" style="align-self: flex-start;font-weight: bold;">Agenda</label>
-            <textarea class="form-control" id="id_agenda" name="agenda" required="required" readonly>{{ concurso.agenda }}</textarea>
-
-            <label for="id_alojamento" class="form-label" style="align-self: flex-start;font-weight: bold;">Alojamento</label>
-            <textarea class="form-control" id="id_alojamento" name="alojamento" readonly>{{ concurso.alojamento }}</textarea>
-
-            <label for="id_orador" class="form-label" style="align-self: flex-start;font-weight: bold;">Orador</label>
-            <textarea class="form-control" id="id_orador" name="orador" readonly>{{ concurso.orador }}</textarea>
-
-            <label for="id_moderador" class="form-label" style="align-self: flex-start;font-weight: bold;">Moderador</label>
-            <textarea class="form-control" id="id_moderador" name="moderador" readonly>{{ concurso.moderador }}</textarea>
-
-            <label for="id_data_submissao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Submissão de Resumos</label>
-            <textarea class="form-control" id="id_data_submissao_resumos" name="data_submissao_resumos" readonly>{{ concurso.data_submissao_resumos }}</textarea>
-
-            <label for="id_data_notificacao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Notificação de Resumos</label>
-            <textarea class="form-control" id="id_data_notificacao_resumos" name="data_notificacao_resumos" readonly>{{ concurso.data_notificacao_resumos }}</textarea>
-
-            <label for="id_link" class="form-label" style="align-self: flex-start;font-weight: bold;">Link Videoconferência</label>
-            <textarea class="form-control" id="id_link" name="link" readonly>{{ concurso.link }}</textarea>
-
-            <label for="id_parcerias" class="form-label" style="align-self: flex-start;font-weight: bold;">Parcerias</label>
-            <textarea class="form-control" id="id_parcerias" name="parcerias" readonly>{{ concurso.parcerias }}</textarea>
-
-            <label for="id_numero_elementos_equipa" class="form-label" style="align-self: flex-start;font-weight: bold;">Número de Elementos por Equipa</label>
-            <textarea class="form-control" id="id_numero_elementos_equipa" name="numero_elementos_equipa" readonly>{{ concurso.numero_elementos_equipa }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ concurso.get_tipoevento_display }}</textarea>
 
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ concurso.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
-
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ concurso.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -558,18 +494,23 @@
               <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ palestra.descricao }}</textarea>
             {% endif %}
-
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ palestra.encurso.entidade }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ palestra.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ palestra.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ palestra.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ palestra.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ palestra.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ palestra.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ palestra.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ palestra.data_inicio }}</textarea>
@@ -577,78 +518,34 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ palestra.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ palestra.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ palestra.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ palestra.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ palestra.publico_alvo }}</textarea>
 
-            <!-- Campos Eventos Científicos -->
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ palestra.data_inicio_inscricao }}</textarea>
 
-            <label for="id_tipodeevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
-            <textarea class="form-control" id="id_tipodeevento" name="id_tipodeevento" required="required" readonly>Palestra</textarea>
-
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ palestra.data_limite_inscricao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ palestra.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ palestra.duracao }}</textarea>   
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ palestra.vagas }}</textarea>
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ palestra.horario }}</textarea>
-
-            <label for="id_local_alojamento" class="form-label" style="align-self: flex-start; font-weight: bold;">Local do Alojamento</label>
-            <textarea class="form-control" id="id_local_alojamento" name="local_alojamento" required="required" readonly>{{ palestra.local_alojamento }}</textarea>
-
-            <label for="id_agenda" class="form-label" style="align-self: flex-start;font-weight: bold;">Agenda</label>
-            <textarea class="form-control" id="id_agenda" name="agenda" required="required" readonly>{{ palestra.agenda }}</textarea>
-
-            <label for="id_alojamento" class="form-label" style="align-self: flex-start;font-weight: bold;">Alojamento</label>
-            <textarea class="form-control" id="id_alojamento" name="alojamento" readonly>{{ palestra.alojamento }}</textarea>
-
-            <label for="id_orador" class="form-label" style="align-self: flex-start;font-weight: bold;">Orador</label>
-            <textarea class="form-control" id="id_orador" name="orador" readonly>{{ palestra.orador }}</textarea>
-
-            <label for="id_moderador" class="form-label" style="align-self: flex-start;font-weight: bold;">Moderador</label>
-            <textarea class="form-control" id="id_moderador" name="moderador" readonly>{{ palestra.moderador }}</textarea>
-
-            <label for="id_data_submissao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Submissão de Resumos</label>
-            <textarea class="form-control" id="id_data_submissao_resumos" name="data_submissao_resumos" readonly>{{ palestra.data_submissao_resumos }}</textarea>
-
-            <label for="id_data_notificacao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Notificação de Resumos</label>
-            <textarea class="form-control" id="id_data_notificacao_resumos" name="data_notificacao_resumos" readonly>{{ palestra.data_notificacao_resumos }}</textarea>
-
-            <label for="id_link" class="form-label" style="align-self: flex-start;font-weight: bold;">Link Videoconferência</label>
-            <textarea class="form-control" id="id_link" name="link" readonly>{{ palestra.link }}</textarea>
-
-            <label for="id_parcerias" class="form-label" style="align-self: flex-start;font-weight: bold;">Parcerias</label>
-            <textarea class="form-control" id="id_parcerias" name="parcerias" readonly>{{ palestra.parcerias }}</textarea>
-
-            <label for="id_numero_elementos_equipa" class="form-label" style="align-self: flex-start;font-weight: bold;">Número de Elementos por Equipa</label>
-            <textarea class="form-control" id="id_numero_elementos_equipa" name="numero_elementos_equipa" readonly>{{ palestra.numero_elementos_equipa }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ palestra.get_tipoevento_display }}</textarea>
 
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ palestra.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
-
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ palestra.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -709,18 +606,23 @@
               <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ congresso.descricao }}</textarea>
             {% endif %}
-
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ congresso.encurso.entidade }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ congresso.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ congresso.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ congresso.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ congresso.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ congresso.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ congresso.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ congresso.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ congresso.data_inicio }}</textarea>
@@ -728,78 +630,34 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ congresso.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ congresso.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ congresso.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ congresso.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ congresso.publico_alvo }}</textarea>
 
-            <!-- Campos Eventos Científicos -->
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ congresso.data_inicio_inscricao }}</textarea>
 
-            <label for="id_tipodeevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
-            <textarea class="form-control" id="id_tipodeevento" name="id_tipodeevento" required="required" readonly>Congresso</textarea>
-
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ congresso.data_limite_inscricao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ congresso.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ congresso.duracao }}</textarea>   
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ congresso.vagas }}</textarea>
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ congresso.horario }}</textarea>
-
-            <label for="id_local_alojamento" class="form-label" style="align-self: flex-start; font-weight: bold;">Local do Alojamento</label>
-            <textarea class="form-control" id="id_local_alojamento" name="local_alojamento" required="required" readonly>{{ congresso.local_alojamento }}</textarea>
-
-            <label for="id_agenda" class="form-label" style="align-self: flex-start;font-weight: bold;">Agenda</label>
-            <textarea class="form-control" id="id_agenda" name="agenda" required="required" readonly>{{ congresso.agenda }}</textarea>
-
-            <label for="id_alojamento" class="form-label" style="align-self: flex-start;font-weight: bold;">Alojamento</label>
-            <textarea class="form-control" id="id_alojamento" name="alojamento" readonly>{{ congresso.alojamento }}</textarea>
-
-            <label for="id_orador" class="form-label" style="align-self: flex-start;font-weight: bold;">Orador</label>
-            <textarea class="form-control" id="id_orador" name="orador" readonly>{{ congresso.orador }}</textarea>
-
-            <label for="id_moderador" class="form-label" style="align-self: flex-start;font-weight: bold;">Moderador</label>
-            <textarea class="form-control" id="id_moderador" name="moderador" readonly>{{ congresso.moderador }}</textarea>
-
-            <label for="id_data_submissao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Submissão de Resumos</label>
-            <textarea class="form-control" id="id_data_submissao_resumos" name="data_submissao_resumos" readonly>{{ congresso.data_submissao_resumos }}</textarea>
-
-            <label for="id_data_notificacao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Notificação de Resumos</label>
-            <textarea class="form-control" id="id_data_notificacao_resumos" name="data_notificacao_resumos" readonly>{{ congresso.data_notificacao_resumos }}</textarea>
-
-            <label for="id_link" class="form-label" style="align-self: flex-start;font-weight: bold;">Link Videoconferência</label>
-            <textarea class="form-control" id="id_link" name="link" readonly>{{ congresso.link }}</textarea>
-
-            <label for="id_parcerias" class="form-label" style="align-self: flex-start;font-weight: bold;">Parcerias</label>
-            <textarea class="form-control" id="id_parcerias" name="parcerias" readonly>{{ congresso.parcerias }}</textarea>
-
-            <label for="id_numero_elementos_equipa" class="form-label" style="align-self: flex-start;font-weight: bold;">Número de Elementos por Equipa</label>
-            <textarea class="form-control" id="id_numero_elementos_equipa" name="numero_elementos_equipa" readonly>{{ congresso.numero_elementos_equipa }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ congresso.get_tipoevento_display }}</textarea>
 
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ congresso.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
-
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ congresso.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -858,18 +716,23 @@
               <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ seminario.descricao }}</textarea>
             {% endif %}
-
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ seminario.encurso.entidade }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ seminario.entidade }}</textarea>
 
             <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
             <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ seminario.local }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ seminario.area }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ seminario.pessoa_de_contacto }}</textarea>
+
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ seminario.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ seminario.custo }}</textarea>
+
+            <label for="id_gps" class="form-label" style="align-self: flex-start;font-weight: bold;">Coordenadas GPS</label>
+            <textarea class="form-control" id="id_gps" name="gps" readonly>{{ seminario.gps }}</textarea>
 
             <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
             <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ seminario.data_inicio }}</textarea>
@@ -877,78 +740,34 @@
             <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
             <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ seminario.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ seminario.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ seminario.contacto }}</textarea>
-
             <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
             <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ seminario.objetivos }}</textarea>
 
             <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
             <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ seminario.publico_alvo }}</textarea>
 
-            <!-- Campos Eventos Científicos -->
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início para Inscrever</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ seminario.data_inicio_inscricao }}</textarea>
 
-            <label for="id_tipodeevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
-            <textarea class="form-control" id="id_tipodeevento" name="id_tipodeevento" required="required" readonly>Seminário</textarea>
-
-            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data Limite de Inscrição</label>
+            <label for="id_data_limite_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim de Inscrições</label>
             <textarea class="form-control" id="id_data_limite_inscricao" name="data_limite_inscricao" required="required" readonly>{{ seminario.data_limite_inscricao }}</textarea>
-
-            <label for="id_programa" class="form-label" style="align-self: flex-start;font-weight: bold;">Programa</label>
-            <textarea class="form-control" id="id_programa" name="programa" readonly>{{ seminario.programa }}</textarea>
-
-            <label for="id_duracao" class="form-label" style="align-self: flex-start;font-weight: bold;">Duração</label>
-            <textarea class="form-control" id="id_duracao" name="duracao" required="required" readonly>{{ seminario.duracao }}</textarea>   
 
             <label for="id_vagas" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
             <textarea class="form-control" id="id_vagas" name="vagas" readonly>{{ seminario.vagas }}</textarea>
 
-            <label for="id_horario" class="form-label" style="align-self: flex-start;font-weight: bold;">Horário</label>
-            <textarea class="form-control" id="id_horario" name="horario" readonly>{{ seminario.horario }}</textarea>
-
-            <label for="id_local_alojamento" class="form-label" style="align-self: flex-start; font-weight: bold;">Local do Alojamento</label>
-            <textarea class="form-control" id="id_local_alojamento" name="local_alojamento" required="required" readonly>{{ seminario.local_alojamento }}</textarea>
-
-            <label for="id_agenda" class="form-label" style="align-self: flex-start;font-weight: bold;">Agenda</label>
-            <textarea class="form-control" id="id_agenda" name="agenda" required="required" readonly>{{ seminario.agenda }}</textarea>
-
-            <label for="id_alojamento" class="form-label" style="align-self: flex-start;font-weight: bold;">Alojamento</label>
-            <textarea class="form-control" id="id_alojamento" name="alojamento" readonly>{{ seminario.alojamento }}</textarea>
-
-            <label for="id_orador" class="form-label" style="align-self: flex-start;font-weight: bold;">Orador</label>
-            <textarea class="form-control" id="id_orador" name="orador" readonly>{{ seminario.orador }}</textarea>
-
-            <label for="id_moderador" class="form-label" style="align-self: flex-start;font-weight: bold;">Moderador</label>
-            <textarea class="form-control" id="id_moderador" name="moderador" readonly>{{ seminario.moderador }}</textarea>
-
-            <label for="id_data_submissao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Submissão de Resumos</label>
-            <textarea class="form-control" id="id_data_submissao_resumos" name="data_submissao_resumos" readonly>{{ seminario.data_submissao_resumos }}</textarea>
-
-            <label for="id_data_notificacao_resumos" class="form-label" style="align-self: flex-start;font-weight: bold;">Data Notificação de Resumos</label>
-            <textarea class="form-control" id="id_data_notificacao_resumos" name="data_notificacao_resumos" readonly>{{ seminario.data_notificacao_resumos }}</textarea>
-
-            <label for="id_link" class="form-label" style="align-self: flex-start;font-weight: bold;">Link Videoconferência</label>
-            <textarea class="form-control" id="id_link" name="link" readonly>{{ seminario.link }}</textarea>
-
-            <label for="id_parcerias" class="form-label" style="align-self: flex-start;font-weight: bold;">Parcerias</label>
-            <textarea class="form-control" id="id_parcerias" name="parcerias" readonly>{{ seminario.parcerias }}</textarea>
-
-            <label for="id_numero_elementos_equipa" class="form-label" style="align-self: flex-start;font-weight: bold;">Número de Elementos por Equipa</label>
-            <textarea class="form-control" id="id_numero_elementos_equipa" name="numero_elementos_equipa" readonly>{{ seminario.numero_elementos_equipa }}</textarea>
+            <label for="id_tipoevento" class="form-label" style="align-self: flex-start; font-weight: bold;">Tipo de Evento</label>
+            <textarea class="form-control" id="id_tipoevento" name="tipoevento" required="required" readonly>{{ seminario.get_tipoevento_display }}</textarea>
 
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ seminario.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
-
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ seminario.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
@@ -1009,44 +828,31 @@
               <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ servico.descricao }}</textarea>
             {% endif %}
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
-            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ servico.encurso.entidade }}</textarea>
+            <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ servico.entidade }}</textarea>
 
-            <label for="id_local" class="form-label" style="align-self: flex-start; font-weight: bold;">Local</label>
-            <textarea class="form-control" id="id_local" name="local" required="required" readonly>{{ servico.local }}</textarea>
+            <label for="id_pessoa_de_contacto" class="form-label" style="align-self: flex-start; font-weight: bold;">Pessoa de Contacto</label>
+            <textarea class="form-control" id="id_pessoa_de_contacto" name="pessoa_de_contacto" required="required" readonly>{{ servico.pessoa_de_contato }}</textarea>
 
-            <label for="id_area" class="form-label" style="align-self: flex-start; font-weight: bold;">Área</label>
-            <textarea class="form-control" id="id_area" name="area" required="required" readonly>{{ servico.area }}</textarea>
+            <label for="id_email" class="form-label" style="align-self: flex-start; font-weight: bold;">Email</label>
+            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ servico.email }}</textarea>
 
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ servico.custo }}</textarea>
 
-            <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
-            <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ servico.data_inicio }}</textarea>
+            <label for="id_detalhes" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
+            <textarea class="form-control" id="id_detalhes" name="detalhes" readonly>{{ servico.servico.detalhes }}</textarea>
 
-            <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
-            <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ servico.data_fim }}</textarea>
 
-            <label for="id_email" class="form-label" style="align-self: flex-start;font-weight: bold;">Email da Escola</label>
-            <textarea class="form-control" id="id_email" name="email" required="required" readonly>{{ servico.email }}</textarea>
-
-            <label for="id_contacto" class="form-label" style="align-self: flex-start;font-weight: bold;">Contacto Escola</label>
-            <textarea class="form-control" id="id_contacto" name="contacto" required="required" readonly>{{ servico.contacto }}</textarea>
-
-            <label for="id_objetivos" class="form-label" style="align-self: flex-start;font-weight: bold;">Objetivos</label>
-            <textarea class="form-control" id="id_objetivos" name="objetivos" required="required" readonly>{{ servico.objetivos }}</textarea>
-
-            <label for="id_publico_alvo" class="form-label" style="align-self: flex-start;font-weight: bold;">Público Alvo</label>
-            <textarea class="form-control" id="id_publico_alvo" name="publico_alvo" readonly>{{ servico.publico_alvo }}</textarea>
-          
             <button
-                type="button"
-                class="btn btn-link"
-                data-bs-toggle="modal"
-                onclick="openModal({{ servico.id }})"
-                style="margin-top: 30px;"
-              >
-                Pré-Inscrição
-              </button>
+              id="registerButton"
+              type="button"
+              class="btn btn-link"
+              data-bs-toggle="modal"
+              onclick="openModal({{ servico.id }})"
+              style="margin-top: 30px;"
+            >
+              Pré-Inscrição
+            </button>
           </div>
         </div>
       </div>
