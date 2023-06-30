@@ -1,0 +1,359 @@
+<div class="modal fade" id="loginModal2" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="width: 600px">
+      <div class="modal-body">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Login</h1>
+          {% if error_message %}
+          <div class="alert alert-danger">{{ error_message }}</div>
+          <script>
+            $(document).ready(function () {
+              $("#ModalFormLogin").modal("show");
+            });
+          </script>
+          {% endif %}
+          <form method="post" action="{% url 'requisitarinscricao' %}" id="loginForm1">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"><i class="fa-solid fa-user"></i> Username</label>
+              <input type="text" class="form-control" id="id_username" autocomplete="new-username" required="required"
+                name="username" aria-describedby="usernameHelp" 
+                {% if request.method == 'POST' %}
+                  value="{{ request.POST.username }}" 
+                {% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="id_password" class="form-label"><i class="fa-solid fa-key"></i> Password</label>
+              <input type="password" class="form-control" autocomplete="new-password" required="required"
+                id="id_password" name="password" />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+            <p>
+              Ainda não tem conta?
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#ModalRegister1">
+                Registe-se
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalRegister1" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="width: 600px">
+      <div class="modal-body">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Registo</h1>
+          <form method="POST" enctype="multipart/form-data" action="{% url 'requisitarregisto' %}">
+            {% csrf_token %}
+            <h2>Informação pessoal</h2>
+            <div class="mb-3 mt-4">
+              <label for="id_username" class="form-label"><i class="fa-solid fa-user"></i> Username</label>
+              <input type="text" class="form-control" id="id_username" autocomplete="new-username" required="required"
+                name="username" aria-describedby="usernameHelp" 
+                {% if request.method == 'POST' %}
+                value="{{ request.POST.username }}" 
+                {% endif %}>
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail4" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="" name="email" required="required"
+                value="" />
+            </div>
+            <div class="mb-3">
+              <label for="id_password1" class="form-label"><i class="fa-solid fa-key"></i> Password</label>
+              <input type="password" class="form-control" autocomplete="new-password" id="id_password1"
+                required="required" name="password1" />
+            </div>
+            <div class="mb-3">
+              <label for="id_password2" class="form-label"><i class="fa-solid fa-key"></i> Confirm Password</label>
+              <input type="password" class="form-control" autocomplete="new-password" id="id_password2"
+                required="required" name="password2" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Primeiro Nome *</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome" name="first_name"
+                required="required" value="" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Último Nome *</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Último Nome" name="last_name"
+                required="required" value="" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contacto pessoal*</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contacto"
+                required="required" value="" />
+            </div>
+            <h2>Informação da empresa</h2>
+                <div class="mb-3">
+                  <label class="form-label">Nome da empresa *</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Nome Completo" name="nomeempresa"
+                    required="required" value="" />
+                </div>
+                <div class="mb-3">
+                  <label for="inputEmail4" class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="" name="emailempresa"
+                    required="required" value="" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Contacto*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contactoempresa"
+                    required="required" value="" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Morada*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Morada" name="moradaempresa"
+                    required="required" value="" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Código Postal*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="CodigoPostal" required="required"
+                    name="codigo_postalempresa" value="" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Nome do Representante*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="pessoadecontato" required="required"
+                    name="pessoadecontato" {%if stakeholder.pessoa_de_contato %} readonly {% endif %}value="{{ stakeholder.pessoa_de_contato }}"  />
+                </div>
+
+            <h2>Detalhes do servico</h2>
+            <div class="mb-3">
+              <label class="form-label">Detalhes</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Detalhes" name="detalhes" value="" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data de Início*</label>
+              <input type="date" class="form-control" placeholder="" aria-label="DataInicio" required="required"
+                name="datainicio" value />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data de Fim*</label>
+              <input type="date" class="form-control" placeholder="" aria-label="DataFim" required="required"
+                name="datafim" value />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Imagens</label>
+              <input type="file" class="form-control" id="id_imagem" name="imagens_de_referencia">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Público *</label>
+              <select class="form-select" name="publico" required="required">
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+              </select>
+            </div>
+            <div class="mb-3" visually-hidden>
+              <input type="text" class="form-control" placeholder="" style="display: none" aria-label="" id="idservico"
+                name="idservico" value />
+            </div>
+
+            <div class="mb-3" visually-hidden>
+              <input type="text" class="form-control" placeholder="" style="display: none" aria-label="" id="entidade"
+                name="entidade" value />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">Registar</button>
+            <p>
+              Já tem conta criada?
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#loginModal2">
+                Login
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Original Modal for Activity Registration -->
+
+<div class="modal fade" id="ModalServico" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="width: 600px">
+      <div class="modal-body">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Inscrição</h1>
+          <form method="POST" id="inscricaoform" enctype="multipart/form-data" action="{% url 'requisicao' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Primeiro Nome *</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome" name="first_name"
+                required="required"{%if request.user.first_name %} readonly {%endif%}  value="{{ request.user.first_name }}" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Último Nome *</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Último Nome" name="last_name"
+                required="required" {%if request.user.last_name %} readonly {%endif%}  value="{{ request.user.last_name }}" />
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail4" class="form-label">Email *</label>
+              <input type="email" class="form-control" readonly id="inputEmail4" placeholder="" name="email" required="required"
+                value="{{ request.user.email }}" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contacto pessoal*</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contacto"
+                required="required" value="{{ request.user.pessoasdecontato.contato_telefonico }}" />
+            </div>
+            <h2>Informação da empresa</h2>
+            {% for stakeholder in stakeholders %} 
+              {%if user.pessoasdecontato.stakeholder_id == stakeholder.id %}
+                <div class="mb-3">
+                  <label class="form-label">Nome da empresa *</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Nome Completo" name="nomeempresa"
+                    required="required" {%if stakeholder.nome != 'Sem Stakeholder'%} value="{{ stakeholder.nome }}"  {%endif%}  />
+                </div>
+                <div class="mb-3">
+                  <label for="inputEmail4" class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="" name="emailempresa"
+                    required="required" value="{{ stakeholder.email }}" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Contacto*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Contacto" name="contactoempresa"
+                    required="required" value="{{ stakeholder.contacto_telefonico }}" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Morada*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Morada" name="moradaempresa"
+                    required="required" value="{{ stakeholder.morada }}" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Código Postal*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="CodigoPostal" required="required"
+                    name="codigo_postalempresa" value="{{ stakeholder.codigo_postal }}" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Nome do Representante*</label>
+                  <input type="text" class="form-control" placeholder="" aria-label="pessoadecontato" required="required"
+                    name="pessoadecontato" {%if stakeholder.pessoa_de_contato %} readonly {% endif %}value="{{ stakeholder.pessoa_de_contato }}"  />
+                </div>
+              {%endif%} 
+            {%endfor%}
+
+            <h2>Detalhes do servico</h2>
+            <div class="mb-3">
+              <label class="form-label">Detalhes</label>
+              <input type="text" class="form-control" placeholder="" aria-label="Detalhes" name="detalhes" value="" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data de Início*</label>
+              <input type="date" class="form-control" placeholder="" aria-label="DataInicio" required="required"
+                name="datainicio" value />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data de Fim*</label>
+              <input type="date" class="form-control" placeholder="" aria-label="DataFim" required="required"
+                name="datafim" value />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Imagens</label>
+              <input type="file" class="form-control" id="id_imagem" name="imagens_de_referencia">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Público *</label>
+              <select class="form-select" name="publico" required="required">
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+              </select>
+            </div>
+            <div class="mb-3" visually-hidden>
+              <input type="text" class="form-control" placeholder="" style="display: none" aria-label="" id="idservico1"
+                name="idservico1" value />
+            </div>
+
+            <div class="mb-3" visually-hidden>
+              <input type="text" class="form-control" placeholder="" style="display: none" aria-label="" id="entidade1"
+                name="entidade1" value />
+            </div>
+            <button type="submit" class="btn btn-light mt-3">
+              Solicitar Serviço
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include the JavaScript/jQuery code -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function openModal1(cursoID, entidade) {
+    var isLoggedIn = {{ request.user.is_authenticated| lower }};
+
+  // Set the value of the input field
+  $('#idservico').val(cursoID);
+  $('#idservico1').val(cursoID);
+  $('#entidade').val(entidade);
+  $('#entidade1').val(entidade);
+
+  if (isLoggedIn) {
+    // User is logged in
+    // Show the modal for registered users
+    $('#ModalServico').modal('show');
+  } else {
+    // User is not logged in
+    // Show the modal for login or registration
+    $('#loginModal2').modal('show');
+  }
+  }
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#loginForm1").submit(function (e) {
+      e.preventDefault(); // Prevent the form from submitting normally
+
+      // Perform AJAX login request
+      $.ajax({
+        type: "POST",
+        url: "/loginservico/", // Update with the correct URL path for the logininscricao view
+        data: $(this).serialize(),
+        success: function (response) {
+          // Check the response for login success
+          if (response.success) {
+            // Perform any additional login-related logic here
+            // ...
+
+            // Get the atividade value
+            var servico = $("#idservico1").val();
+
+            // Refresh the page with the atividade value as a query parameter
+            var url =
+              window.location.href.split("?")[0] + "?servico=" + servico;
+            window.location.href = url;
+          } else {
+            // Handle login failure, if needed
+            // ...
+          }
+        },
+        error: function (xhr, status, error) {
+          // Handle AJAX errors, if any
+          // ...
+        },
+      });
+    });
+
+    // Check if atividade query parameter exists in the URL
+    var params = new URLSearchParams(window.location.search);
+    if (params.has("servico")) {
+      var servico = params.get("servico");
+
+      // Set the atividade value to the hidden input field
+      $("#idservico1").val(servico);
+
+      // Open the modal with the respective atividade
+      $("#ModalServico").modal("show");
+      // Use the atividade value in the modal as needed
+      // ...
+    }
+  });
+</script>

@@ -89,7 +89,7 @@ class PreInscricao(models.Model):
     data_pre_inscricao = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"PreInscricao - {self.participante.user.username} - {self.evento.atividade.designacao}"
+        return f"PreInscricao - {self.participante.user.username} - {self.evento.designacao}"
 
 
 class Stakeholder(models.Model):
@@ -126,7 +126,7 @@ class Portefolio(models.Model):
     imagens_de_referencia = models.ImageField(upload_to='stakeholders/img/Servicos', blank=True)
     detalhes = models.TextField(blank=True)
     publico = models.BooleanField(blank=True)
-    data_de_requisicao = models.DateField()
+    data_de_requisicao = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"Portefolio ({self.stakeholder.nome} - {self.servico.designacao})"

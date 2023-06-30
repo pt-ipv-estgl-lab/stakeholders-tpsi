@@ -83,6 +83,7 @@
 </div>
 
 {% include 'stakeholders/inscricao.html' %}
+{% include 'stakeholders/requisicao.html' %}
 <!-- BARRA SEPARAÇÃO -->
 <div class="black-bar cursostitulo"></div>
 {% if cursos %}
@@ -848,10 +849,10 @@
               type="button"
               class="btn btn-link"
               data-bs-toggle="modal"
-              onclick="openModal({{ servico.id }})"
+              onclick="openModal1({{ servico.id }},{{ servico.entidade_id }})"
               style="margin-top: 30px;"
             >
-              Pré-Inscrição
+              Solicitar Serviço
             </button>
           </div>
         </div>

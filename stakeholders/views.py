@@ -1,12 +1,11 @@
 from datetime import date
 from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Entidade, Portefolio, Servico, Participante, PreInscricao, Evento, Oferta, Stakeholder
+from .models import Entidade, PessoasDeContato, Portefolio, Servico, Participante, PreInscricao, Evento, Oferta, Stakeholder
 from django.contrib.auth.decorators import login_required
 
 
@@ -23,6 +22,8 @@ def home(request):
     concursos = Evento.objects.filter(tipoevento='CN')
     palestras = Evento.objects.filter(tipoevento='PA')
     seminarios = Evento.objects.filter(tipoevento='SE')
+    stakeholders = Stakeholder.objects.all()
+    pessoasdecontato = PessoasDeContato.objects.all()
     
     context = {
         'login_failed': login_failed,
@@ -34,6 +35,8 @@ def home(request):
         'palestras' : palestras,
         'seminarios' : seminarios,
         'servicos' : servicos,
+        'stakeholders' : stakeholders,
+        'pessoasdecontato' : pessoasdecontato,
     }
     
     return render(request, 'stakeholders/home.html', context)
@@ -90,6 +93,9 @@ def sign_up(request):
         participante = Participante.objects.create(user=user, nomes_do_meio='', nif='', morada='',
                                          codigo_postal='', freguesia='', concelho='',
                                          distrito='', contacto='')
+        
+        # Create a profile for the user with all fields blank
+        pessoacontato = PessoasDeContato.objects.create(user=user, stakeholder_id=7,contato_telefonico='')
 
         # Log in the user
         login(request, user)
@@ -244,12 +250,12 @@ def inscricao_view(request):
         user.participante.save()
 
         # Check if the user is already registered for the activity
-        existing_inscricao = PreInscricao.objects.filter(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade1')).first()
+        existing_inscricao = PreInscricao.objects.filter(participante_id=user.participante.id, evento_id=request.POST.get('idatividade1')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
 
-        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade1'))
+        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, evento_id=request.POST.get('idatividade1'))
         messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
 
         return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
@@ -309,12 +315,12 @@ def inscricaoregisto_view(request):
         # Log in the user
         login(request, user)
         
-        existing_inscricao = PreInscricao.objects.filter(participante_id=participante.id, atividade_id=request.POST.get('idatividade')).first()
+        existing_inscricao = PreInscricao.objects.filter(participante_id=participante.id, evento_id=request.POST.get('idatividade')).first()
         if existing_inscricao:
             messages.error(request, 'Já está inscrito nesta atividade.')
             return redirect('home')  # Redirect to home or display an error message
 
-        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, atividade_id=request.POST.get('idatividade'))
+        inscricao = PreInscricao.objects.create(participante_id=user.participante.id, evento_id=request.POST.get('idatividade'))
         messages.success(request, 'Pré-Inscrição efetuada com sucesso!')
 
         # Registration successful, redirect to home without an error message
@@ -323,56 +329,20 @@ def inscricaoregisto_view(request):
         # Render the home template with an empty form
         return render(request, 'home.html')
 
-
+@login_required
 def requisitar_view(request):
     if request.method == 'POST':
         # Get form data
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-
-        # Check if username is already taken
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Esse nome de utilizador já existe.')
-            return redirect('requisitar') 
 
         user = User.objects.filter(username=username).first()
-        if user:
-            # Check if user already has an associated Oferta
-            if Oferta.objects.filter(user=user).exists():
-                messages.error(request, 'Esse nome de Utilizador já tem um pedido registado.')
-                return redirect('requisitar') 
-        else:
-            try:
-                # Create new user
-                user = User.objects.create_user(
-                    username=username,
-                    email=email,
-                    password=password,
-                    first_name=first_name,
-                    last_name=last_name
-                )
 
-                # Log in the user
-                auth_user = authenticate(request, username=username, password=password)
-                if auth_user:
-                    login(request, auth_user)
-                else:
-                    messages.error(request, 'Não foi possível realizar o login.')
-                    return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
-            except Exception:
-                messages.error(request, 'Ocorreu um erro com o seu pedido, por favor volte a tentar')
-                return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+        # Check if user already has an associated Oferta
+        if Oferta.objects.filter(user=user).exists():
+            messages.error(request, 'Esse nome de Utilizador já tem um pedido de parceria registado.')
+            return redirect('requisitar')
 
-
-        # Create a profile for the user with all fields blank
-        participante = Participante.objects.create(user=user, nomes_do_meio='', nif='', morada='',
-                                         codigo_postal='', freguesia='', concelho='',
-                                         distrito='', contacto='',data_nascimento=date.today())
-        
-        
         # Create new oferta
         nome_empresa = request.POST.get('nome_empresa')
         morada = request.POST.get('morada')
@@ -404,6 +374,120 @@ def requisitar_view(request):
     }
 
     return render(request, 'stakeholders/requisitar.html', context)
+
+
+@login_required
+def requisicao_view(request):
+    
+    if request.method == 'POST':
+        # Retrieve the uploaded file
+        uploaded_file = request.FILES.get('imagens_de_referencia')
+        
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+
+        # Update the profile fields with the submitted form data
+        user.pessoasdecontato.contato_telefonico = request.POST.get('contacto')
+
+        user.save()
+        user.pessoasdecontato.save()
+        if request.POST.get('nomeempresa') != 'Sem Stakeholder':
+            existing_stakeholder = Stakeholder.objects.filter(email=request.POST.get('emailempresa')).first()
+            if existing_stakeholder:
+                stakeholders = Stakeholder.objects.all()
+                for stakeholder in stakeholders:
+                    if request.POST.get('emailempresa') == stakeholder.email:
+                        user.pessoasdecontato.stakeholder_id = stakeholder.id
+                        user.pessoasdecontato.save()
+            else:
+                stakeholders = Stakeholder.objects.all()
+                for stakeholder in stakeholders:
+                    if user.pessoasdecontato.stakeholder_id == stakeholder.id:
+                        stakeholder.nome=request.POST.get('nomeempresa')
+                        stakeholder.morada=request.POST.get('moradaempresa')
+                        stakeholder.codigo_postal=request.POST.get('codigo_postalempresa')
+                        stakeholder.contacto_telefonico=request.POST.get('contactoempresa')
+                        stakeholder.email=request.POST.get('emailempresa')
+                        stakeholder.pessoa_de_contato = request.POST.get('pessoadecontato')
+                        stakeholder.save()
+        
+        # Check if the user is already registered for the activity
+        portefolio = Portefolio.objects.create(imagens_de_referencia=uploaded_file,detalhes=request.POST.get('detalhes'),publico=request.POST.get('publico'),stakeholder_id=user.pessoasdecontato.stakeholder_id, servico_id=request.POST.get('idservico1'), data_de_fim=request.POST.get('datafim'), data_de_inicio=request.POST.get('datainicio'))
+        messages.success(request, 'Requisição efetuada com sucesso!')
+
+        return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
+
+    return render(request, 'stakeholders/home.html')
+
+def requisitarinscricao_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Update the session to reflect the logged-in user
+            request.session.modified = True
+            # Return success response
+            return JsonResponse({'success': True})
+        else:
+            # Invalid login
+            return JsonResponse({'success': False})
+    
+    # Return error response for non-POST requests
+    return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
+def requisitarregisto_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        first = request.POST.get('first_name')
+        last = request.POST.get('last_name')
+
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return redirect(reverse('home') + '?register_failed=True')
+
+        # Check if a user with the same username or email already exists
+        if User.objects.filter(username__iexact=username).exists():
+            messages.error(request, 'Username already exists.')
+            return redirect(reverse('home') + '?register_failed=True')
+
+        if User.objects.filter(email__iexact=email).exists():
+            messages.error(request, 'Email already exists.')
+            return redirect(reverse('home') + '?register_failed=True')
+        
+
+        # Create the user
+        user = User.objects.create_user(username=username, email=email, password=password1, first_name=first, last_name=last)
+        stakeholder = Stakeholder.objects.create(nome=request.POST.get('nomeempresa'), morada=request.POST.get('moradaempresa'), codigo_postal=request.POST.get('codigo_postalempresa'), contacto_telefonico=request.POST.get('contactoempresa'), email=request.POST.get('emailempresa'), entidade_id=request.POST.get('entidade'))
+        
+        
+        # Create a profile for the user with all fields blank
+        pessoacontato = PessoasDeContato.objects.create(user=user, contato_telefonico=request.POST.get('contacto'), stakeholder_id=stakeholder.id)
+        
+        # Create a profile for the user with all fields blank
+        participante = Participante.objects.create(user=user, nomes_do_meio='', nif='', morada='',
+                                         codigo_postal='', freguesia='', concelho='',
+                                         distrito='', contacto='',data_nascimento=date.today())
+
+        # Log in the user
+        login(request, user)
+       
+        # Check if the user is already registered for the activity
+        portefolio =Portefolio.objects.create(imagens_de_referencia=request.POST.get('imagens'),detalhes=request.POST.get('detalhes'),publico=request.POST.get('publico'),stakeholder_id=stakeholder.id, servico_id=request.POST.get('idservico'), data_de_fim=request.POST.get('datafim'), data_de_inicio=request.POST.get('datainicio'))
+        messages.success(request, 'Requisição efetuada com sucesso!')
+        # Registration successful, redirect to home without an error message
+        return redirect(reverse('home'))
+    else:
+        # Render the home template with an empty form
+        return render(request, 'home.html')
+
 
 def portfolios_view(request):
     portfolios = Portefolio.objects.filter(publico=True)

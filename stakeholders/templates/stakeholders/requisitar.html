@@ -30,27 +30,12 @@
                                 <!-- Username -->
                                 <div class="col-md-6">
                                     <label class="form-label">Username *</label>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Username" name="username" required="required" value>
-                                </div>
-                                <!-- Primeiro Nome -->
-                                <div class="col-md-6">
-                                    <label class="form-label">Primeiro Nome *</label>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Primeiro Nome" name="first_name" required="required" value>
-                                </div>
-                                <!-- Último Nome -->
-                                <div class="col-md-6">
-                                    <label class="form-label">Último Nome *</label>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Último Nome" name="last_name" required="required" value>
+                                    <input type="text" class="form-control" placeholder="" aria-label="Username" readonly name="username" required="required" value="{{ request.user.username }}">
                                 </div>
                                 <!-- Email -->
                                 <div class="col-md-6">
                                     <label for="inputEmail4" class="form-label">Email *</label>
-                                    <input type="Email" class="form-control" id="inputEmail4" placeholder="" name="email" required="required" value>
-                                </div>
-                                <!-- New password -->
-                                <div class="col-md-6">
-                                    <label for="password" class="form-label">Password *</label>
-                                    <input type="Password" class="form-control" id="password" name="password">
+                                    <input type="Email" class="form-control" id="inputEmail4" placeholder="" readonly name="email" required="required" value="{{ request.user.email }}">
                                 </div>
                             </div>
                         </div>
