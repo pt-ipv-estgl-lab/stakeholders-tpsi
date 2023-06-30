@@ -798,7 +798,8 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted">
-                  <p class="card-text" style="color: black;">{{ servico.descricao }}</p>
+                  <p class="card-text" style="color: black;">{{ servico.entidade }}</p>
+                  <p class="card-text" style="color: black;">{{ servico.custo }}</p>
                 </small>
               </div>
             </div>
@@ -824,10 +825,11 @@
           <div class="servico-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             {% if servico.image %}
               <img src="{% static servico.image.url %}" alt="" style="width: 500px; height=100%; border-radius:5px;">
-            {% else %}
-              <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
-              <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly>{{ servico.descricao }}</textarea>
             {% endif %}
+
+            <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Descrição</label>
+            <textarea class="form-control" id="id_descricao" name="descricao" required="required" rows='20' readonly>{{ servico.descricao }}</textarea>
+
             <label for="id_escola" class="form-label" style="align-self: flex-start; font-weight: bold;">Escola</label>
             <textarea class="form-control" id="id_escola" name="escola" required="required" readonly>{{ servico.entidade }}</textarea>
 
@@ -840,8 +842,8 @@
             <label for="id_custo" class="form-label" style="align-self: flex-start;font-weight: bold;">Custo</label>
             <textarea class="form-control" id="id_custo" name="custo" readonly>{{ servico.custo }}</textarea>
 
-            <label for="id_detalhes" class="form-label" style="align-self: flex-start;font-weight: bold;">Vagas</label>
-            <textarea class="form-control" id="id_detalhes" name="detalhes" readonly>{{ servico.servico.detalhes }}</textarea>
+            <label for="id_detalhes" class="form-label" style="align-self: flex-start;font-weight: bold;">Detalhes</label>
+            <textarea class="form-control" id="id_detalhes" name="detalhes" rows='20' readonly>{{ servico.servico.detalhes }}</textarea>
 
 
             <button
