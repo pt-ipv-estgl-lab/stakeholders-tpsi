@@ -1,0 +1,68 @@
+{% extends 'stakeholders/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-cards portfolioscontainer">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for portfolio in portfolios %}
+        <div class="col">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#myModalPortfolios{{ portfolio.id }}" class="card-link">
+            <div class="card h-100">
+              <div class="card-body" style="background-color: #550A21;">
+                <h5 class="card-title" style="color: white;">{{ portfolio.stakeholder }}</h5>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">
+                  <p class="card-text" style="color: black;">{{ portfolio.servico }}</p>
+                </small>
+              </div>
+            </div>
+          </a>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="black-bar portfoliostitulo"></div>
+<!-- MODAL portfolio -->
+{% for portfolio in portfolios %}
+<div class="modal fade" id="myModalPortfolios{{ portfolio.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="width: 80%; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+      <div class="portfolio-modal-body" style="width: 600px;">
+        <div class="myform bg-dark">
+          <div style="display: flex; flex-direction: row;">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="right:-100px; top:0px"></button>
+            <h1 class="text-center">{{ portfolio.stakeholder }}</h1>
+          </div>
+          <div class="portfolio-mb-3 mt-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            {% if portfolio.imagens_de_referencia %}
+              <img src="{% static portfolio.imagens_de_referencia.url %}" alt="" style="width: 500px; height=100%; border-radius:5px;">
+            {% endif %}
+
+            <label for="id_descricao" class="form-label" style="align-self: flex-start;font-weight: bold;">Detalhes</label>
+            <textarea class="form-control" id="id_descricao" name="descricao" required="required" readonly rows="16">{{ portfolio.detalhes }}</textarea>
+
+            <label for="id_servico" class="form-label" style="align-self: flex-start; font-weight: bold;">Serviço</label>
+            <textarea class="form-control" id="id_servico" name="servico" required="required" readonly>{{ portfolio.servico }}</textarea>
+
+            <label for="id_data_inicio_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Início</label>
+            <textarea class="form-control" id="id_data_inicio_atividade" name="data_inicio_atividade" required="required" readonly>{{ portfolio.data_de_inicio }}</textarea>
+
+            <label for="id_data_fim_atividade" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Fim</label>
+            <textarea class="form-control" id="id_data_fim_atividade" name="data_fim_atividade" required="required" readonly>{{ portfolio.data_de_fim }}</textarea>
+
+            <label for="id_data_inicio_inscricao" class="form-label" style="align-self: flex-start; font-weight: bold;">Data de Requisição</label>
+            <textarea class="form-control" id="id_data_inicio_inscricao" name="data_inicio_inscricao" required="required" readonly>{{ portfolio.data_de_requisicao }}</textarea>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}

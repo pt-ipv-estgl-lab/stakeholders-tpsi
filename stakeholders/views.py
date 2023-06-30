@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Entidade, Servico, Participante, PreInscricao, Evento, Oferta
+from .models import Entidade, Portefolio, Servico, Participante, PreInscricao, Evento, Oferta, Stakeholder
 from django.contrib.auth.decorators import login_required
 
 
@@ -324,7 +324,6 @@ def inscricaoregisto_view(request):
         return render(request, 'home.html')
 
 
-
 def requisitar_view(request):
     if request.method == 'POST':
         # Get form data
@@ -337,28 +336,35 @@ def requisitar_view(request):
         # Check if username is already taken
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Esse nome de utilizador já existe.')
-            return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+            return redirect('requisitar') 
 
-        try:
-            # Create new user
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                password=password,
-                first_name=first_name,
-                last_name=last_name
-            )
+        user = User.objects.filter(username=username).first()
+        if user:
+            # Check if user already has an associated Oferta
+            if Oferta.objects.filter(user=user).exists():
+                messages.error(request, 'Esse nome de Utilizador já tem um pedido registado.')
+                return redirect('requisitar') 
+        else:
+            try:
+                # Create new user
+                user = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name
+                )
 
-            # Log in the user
-            auth_user = authenticate(request, username=username, password=password)
-            if auth_user:
-                login(request, auth_user)
-            else:
-                messages.error(request, 'Não foi possível realizar o login.')
+                # Log in the user
+                auth_user = authenticate(request, username=username, password=password)
+                if auth_user:
+                    login(request, auth_user)
+                else:
+                    messages.error(request, 'Não foi possível realizar o login.')
+                    return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
+            except Exception:
+                messages.error(request, 'Ocorreu um erro com o seu pedido, por favor volte a tentar')
                 return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
-        except Exception:
-            messages.error(request, 'Ocorreu um erro com o seu pedido, por favor volte a tentar')
-            return redirect('requisitar')  # Replace 'requisitar' with the URL name of your error page
 
 
         # Create a profile for the user with all fields blank
@@ -388,7 +394,7 @@ def requisitar_view(request):
         oferta.save()
 
         messages.success(request, 'Requisição Enviada com Sucesso')
-        return redirect('requisitar')  # Replace 'requisitar' with the URL name of your success page
+        return redirect('requisitar')
 
     # Get all Entidade objects
     entidades = Entidade.objects.all()
@@ -398,3 +404,15 @@ def requisitar_view(request):
     }
 
     return render(request, 'stakeholders/requisitar.html', context)
+
+def portfolios_view(request):
+    portfolios = Portefolio.objects.filter(publico=True)
+    stakeholders = Stakeholder.objects.all()
+    servicos = Servico.objects.all()
+    context = {
+        'portfolios': portfolios,
+        'stakeholders': stakeholders,
+        'servicos': servicos
+    }
+    return render(request, 'stakeholders/portfolios.html', context)
+
