@@ -21,55 +21,57 @@
       <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active" data-school="Escola Superior de Tecnologia e Gestão de Lamego">
-        <img src="{% static 'stakeholders/img/ESTGLCUT.jpg' %}" class="d-block w-100" alt="Slide 1">
+      <div class="carousel-item active" data-school="Instituto Politécnico de Viseu">
+        <img src="{% static 'stakeholders/img/IPVCUT.jpg' %}" class="d-block w-100" alt="Slide 1">
+        <div class="carousel-caption">
+          <h2>IPV</h2>
+          <p class="designacao-escolas">Instituto Politécnico de Viseu</p>
+        </div>
+        
+      </div>
+      <div class="carousel-item" data-school="Associação para o Desenvolvimento e Investigação de Viseu">
+        <img src="{% static 'stakeholders/img/ADIV.jpg' %}" class="d-block w-100" alt="Slide 2">
+        <div class="carousel-caption">
+          <h2>ADIV</h2>
+          <p class="designacao-escolas">Associação para o Desenvolvimento e Investigação de Viseu</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-school="Escola Superior de Tecnologia e Gestão de Lamego">
+        <img src="{% static 'stakeholders/img/ESTGLCUT.jpg' %}" class="d-block w-100" alt="Slide 3">
         <div class="carousel-caption">
           <h2>ESTGL</h2>
           <p class="designacao-escolas">Escola Superior de Tecnologia e Gestão de Lamego</p>
         </div>
       </div>
-      <div class="carousel-item" data-school="Instituto Politécnico de Viseu">
-        <img src="{% static 'stakeholders/img/IPVCUT.jpg' %}" class="d-block w-100" alt="Slide 2">
-        <div class="carousel-caption">
-          <h2>IPV</h2>
-          <p class="designacao-escolas">Instituto Politécnico de Viseu</p>
-        </div>
-      </div>
       <div class="carousel-item" data-school="Escola Superior de Tecnologia e Gestão de Viseu">
-        <img src="{% static 'stakeholders/img/ESTGVCUT.jpg' %}" class="d-block w-100" alt="Slide 3">
+        <img src="{% static 'stakeholders/img/ESTGVCUT.jpg' %}" class="d-block w-100" alt="Slide 4">
         <div class="carousel-caption">
           <h2>ESTGV</h2>
           <p class="designacao-escolas">Escola Superior de Tecnologia e Gestão de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior de Educação de Viseu">
-        <img src="{% static 'stakeholders/img/ESEVCUT.jpg' %}" class="d-block w-100" alt="Slide 4">
+        <img src="{% static 'stakeholders/img/ESEVCUT.jpg' %}" class="d-block w-100" alt="Slide 5">
         <div class="carousel-caption">
           <h2>ESEV</h2>
           <p class="designacao-escolas">Escola Superior de Educação de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior de Saúde de Viseu">
-        <img src="{% static 'stakeholders/img/ESSVCUT.jpg' %}" class="d-block w-100" alt="Slide 5">
+        <img src="{% static 'stakeholders/img/ESSVCUT.jpg' %}" class="d-block w-100" alt="Slide 6">
         <div class="carousel-caption">
           <h2>ESSV</h2>
           <p class="designacao-escolas">Escola Superior de Saúde de Viseu</p>
         </div>
       </div>
       <div class="carousel-item" data-school="Escola Superior Agrária de Viseu">
-        <img src="{% static 'stakeholders/img/ESAVCUT.jpg' %}" class="d-block w-100" alt="Slide 6">
+        <img src="{% static 'stakeholders/img/ESAVCUT.jpg' %}" class="d-block w-100" alt="Slide 7">
         <div class="carousel-caption">
           <h2>ESAV</h2>
           <p class="designacao-escolas">Escola Superior Agrária de Viseu</p>
         </div>
       </div>
-      <div class="carousel-item" data-school="Associação para o Desenvolvimento e Investigação de Viseu">
-        <img src="{% static 'stakeholders/img/ADIV.jpg' %}" class="d-block w-100" alt="Slide 7">
-        <div class="carousel-caption">
-          <h2>ADIV</h2>
-          <p class="designacao-escolas">Associação para o Desenvolvimento e Investigação de Viseu</p>
-        </div>
-      </div>
+     
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -105,7 +107,7 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted">
-                  <p class="card-text" style="color: black;">{{ curso.descricao }}</p>
+                  <p class="card-text" style="color: black;">{{ curso.entidade }}</p>
                 </small>
               </div>
             </div>
@@ -233,7 +235,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <p class="card-text" style="color: black;">{{ formacao.descricao }}</p>
+                <p class="card-text" style="color: black;">{{ formacao.entidade }}</p>
               </small>
             </div>
           </div>
@@ -356,7 +358,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <p class="card-text" style="color: black;">{{ concurso.descricao }}</p>
+                <p class="card-text" style="color: black;">{{ concurso.entidade }}</p>
               </small>
             </div>
           </div>
@@ -466,7 +468,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <p class="card-text" style="color: black;">{{ palestra.descricao }}</p>
+                <p class="card-text" style="color: black;">{{ palestra.entidade }}</p>
               </small>
             </div>
           </div>
@@ -577,7 +579,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <p class="card-text" style="color: black;">{{ congresso.descricao }}</p>
+                <p class="card-text" style="color: black;">{{ congresso.entidade }}</p>
               </small>
             </div>
           </div>
@@ -688,7 +690,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <p class="card-text" style="color: black;">{{ seminario.descricao }}</p>
+                <p class="card-text" style="color: black;">{{ seminario.entidade }}</p>
               </small>
             </div>
           </div>
@@ -871,13 +873,20 @@
 
 <!-- JavaScript code -->
 <script>
-    $(document).ready(function() {
-      // Function to show/hide containers
-      function showHideContainers(titleClassName, containerClassName, activeSchool) {
+  $(document).ready(function() {
+    // Function to show/hide containers
+    function showHideContainers(titleClassName, containerClassName, activeSchool) {
+      // Check if activeSchool is "Instituto Politécnico de Viseu"
+      if (activeSchool === "Instituto Politécnico de Viseu") {
+        // Show all cards in the container
+        $("." + containerClassName + " .col").show();
+        $("." + titleClassName).show();
+        $("." + containerClassName).show();
+      } else {
         // Filter the cards based on the active school and show them
         var activeSchoolCards = $("." + containerClassName + " .col[data-escola='" + activeSchool + "']");
         activeSchoolCards.show();
-  
+
         if (activeSchoolCards.length === 0) {
           $("." + titleClassName).hide();
           $("." + containerClassName).hide();
@@ -886,33 +895,35 @@
           $("." + containerClassName).show();
         }
       }
-  
-      // Event listener for carousel item change
-      $("#carouselExampleIndicators").on("slid.bs.carousel", function() {
-        // Get the active carousel item
-        var activeItem = $(".carousel-item.active");
-  
-        if (activeItem.length > 0) {
-          // Get the school value from the active item
-          var activeSchool = activeItem.data("school");
-  
-          // Hide all cards before applying the filter
-          $(".container-cards .col").hide();
-  
-          // Call showHideContainers function
-          showHideContainers("cursostitulo", "cursoscontainer", activeSchool);
-          showHideContainers("formacoestitulo", "formacoescontainer", activeSchool);
-          showHideContainers("congressostitulo", "congressoscontainer", activeSchool);
-          showHideContainers("concursostitulo", "concursoscontainer", activeSchool);
-          showHideContainers("palestrastitulo", "palestrascontainer", activeSchool);
-          showHideContainers("seminariostitulo", "seminarioscontainer", activeSchool);
-          showHideContainers("servicostitulo", "servicoscontainer", activeSchool);
-        }
-      });
-  
-      // Trigger the initial filtering on page load
-      $("#carouselExampleIndicators").trigger("slid.bs.carousel");
+    }
+
+    // Event listener for carousel item change
+    $("#carouselExampleIndicators").on("slid.bs.carousel", function() {
+      // Get the active carousel item
+      var activeItem = $(".carousel-item.active");
+
+      if (activeItem.length > 0) {
+        // Get the school value from the active item
+        var activeSchool = activeItem.data("school");
+
+        // Hide all cards before applying the filter
+        $(".container-cards .col").hide();
+
+        // Call showHideContainers function
+        showHideContainers("cursostitulo", "cursoscontainer", activeSchool);
+        showHideContainers("formacoestitulo", "formacoescontainer", activeSchool);
+        showHideContainers("congressostitulo", "congressoscontainer", activeSchool);
+        showHideContainers("concursostitulo", "concursoscontainer", activeSchool);
+        showHideContainers("palestrastitulo", "palestrascontainer", activeSchool);
+        showHideContainers("seminariostitulo", "seminarioscontainer", activeSchool);
+        showHideContainers("servicostitulo", "servicoscontainer", activeSchool);
+      }
     });
+
+    // Trigger the initial filtering on page load
+    $("#carouselExampleIndicators").trigger("slid.bs.carousel");
+  });
 </script>
+
 
 {% endblock %}
