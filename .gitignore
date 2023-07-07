@@ -157,6 +157,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
 # Local configuration
 /local_settings.py
 
