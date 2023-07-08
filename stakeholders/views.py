@@ -392,32 +392,29 @@ def requisicao_view(request):
         user.pessoasdecontato.contato_telefonico = request.POST.get('contacto')
 
         user.save()
+
+        existing_stakeholder = Stakeholder.objects.filter(email=request.POST.get('emailempresa')).first()
+        if existing_stakeholder:
+            stakeholders = Stakeholder.objects.all()
+            for stakeholder in stakeholders:
+                if request.POST.get('emailempresa') == stakeholder.email:
+                    stakeholder.nome=request.POST.get('nomeempresa')
+                    stakeholder.morada=request.POST.get('moradaempresa')
+                    stakeholder.codigo_postal=request.POST.get('codigo_postalempresa')
+                    stakeholder.contacto_telefonico=request.POST.get('contactoempresa')
+                    stakeholder.email=request.POST.get('emailempresa')
+                    stakeholder.pessoa_de_contato = request.POST.get('pessoadecontato')
+                    stakeholder.save()
+        else:
+            new_stakeholder = Stakeholder.objects.create(nome=request.POST.get('nomeempresa'),morada=request.POST.get('moradaempresa'),codigo_postal=request.POST.get('codigo_postalempresa'), contacto_telefonico=request.POST.get('contactoempresa'),email=request.POST.get('emailempresa'),pessoa_de_contato= request.POST.get('pessoadecontato'),entidade_id=request.POST.get('entidade1'))
+            user.pessoasdecontato.stakeholder_id = new_stakeholder.id
+              
         user.pessoasdecontato.save()
-        if request.POST.get('nomeempresa') != 'Sem Stakeholder':
-            existing_stakeholder = Stakeholder.objects.filter(email=request.POST.get('emailempresa')).first()
-            if existing_stakeholder:
-                stakeholders = Stakeholder.objects.all()
-                for stakeholder in stakeholders:
-                    if request.POST.get('emailempresa') == stakeholder.email:
-                        user.pessoasdecontato.stakeholder_id = stakeholder.id
-                        user.pessoasdecontato.save()
-            else:
-                stakeholders = Stakeholder.objects.all()
-                for stakeholder in stakeholders:
-                    if user.pessoasdecontato.stakeholder_id == stakeholder.id:
-                        stakeholder.nome=request.POST.get('nomeempresa')
-                        stakeholder.morada=request.POST.get('moradaempresa')
-                        stakeholder.codigo_postal=request.POST.get('codigo_postalempresa')
-                        stakeholder.contacto_telefonico=request.POST.get('contactoempresa')
-                        stakeholder.email=request.POST.get('emailempresa')
-                        stakeholder.pessoa_de_contato = request.POST.get('pessoadecontato')
-                        stakeholder.save()
-        
         # Check if the user is already registered for the activity
         portefolio = Portefolio.objects.create(imagens_de_referencia=uploaded_file,detalhes=request.POST.get('detalhes'),publico=request.POST.get('publico'),stakeholder_id=user.pessoasdecontato.stakeholder_id, servico_id=request.POST.get('idservico1'), data_de_fim=request.POST.get('datafim'), data_de_inicio=request.POST.get('datainicio'))
         messages.success(request, 'Requisição efetuada com sucesso!')
 
-        return redirect('home')  # Replace 'home' with the desired URL or URL pattern name
+        return redirect('home')  
 
     return render(request, 'stakeholders/home.html')
 
